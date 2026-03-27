@@ -941,8 +941,8 @@ function ListView({ pokemonList, searchQuery, selectedType, selectedGen, onSearc
               style={styles.cardImage}
             />
             <p style={styles.cardId}>#{String(p.id).padStart(3, '0')}</p>
-            <p style={styles.cardName}>{p.name.charAt(0).toUpperCase() + p.name.slice(1)}</p>
             {POKEMON_NAMES_ZH[p.name] && <p style={styles.cardNameZh}>{POKEMON_NAMES_ZH[p.name]}</p>}
+            <p style={styles.cardNameEn}>{p.name.charAt(0).toUpperCase() + p.name.slice(1)}</p>
             <div style={styles.cardTypes}>
               {p.types.map((type, idx) => (
                 <span key={idx} style={{ ...styles.cardTypeBadge, backgroundColor: TYPE_COLORS[type] || '#999' }}>
@@ -1565,8 +1565,8 @@ const styles = {
   card: { backgroundColor: 'rgba(255,255,255,0.95)', borderRadius: 12, padding: 15, textAlign: 'center', cursor: 'pointer', position: 'relative' },
   cardImage: { width: 120, height: 120, objectFit: 'contain' },
   cardId: { fontSize: 12, color: '#666', margin: '5px 0' },
-  cardName: { fontSize: 16, fontWeight: 'bold', color: '#333', margin: '5px 0', textTransform: 'capitalize' },
-  cardNameZh: { fontSize: 12, color: '#666', margin: '0 0 3px 0' },
+  cardNameZh: { fontSize: 16, fontWeight: 'bold', color: '#333', margin: '5px 0 2px 0' },
+  cardNameEn: { fontSize: 12, color: '#666', margin: '0 0 3px 0', textTransform: 'capitalize' },
   cardTypes: { display: 'flex', justifyContent: 'center', gap: 5, marginTop: 8 },
   cardTypeBadge: { padding: '3px 8px', borderRadius: 10, color: '#fff', fontSize: 11, fontWeight: 'bold' },
   favoriteButton: { position: 'absolute', top: 10, right: 10, background: 'rgba(255,255,255,0.8)', border: 'none', borderRadius: '50%', padding: 5, cursor: 'pointer' },
