@@ -1088,7 +1088,7 @@ var App = (() => {
             }
             return dispatcher.useContext(Context);
           }
-          function useState2(initialState) {
+          function useState4(initialState) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState);
           }
@@ -1100,7 +1100,7 @@ var App = (() => {
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
-          function useEffect2(create, deps) {
+          function useEffect5(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useEffect(create, deps);
           }
@@ -1883,7 +1883,7 @@ var App = (() => {
           exports.useContext = useContext;
           exports.useDebugValue = useDebugValue;
           exports.useDeferredValue = useDeferredValue;
-          exports.useEffect = useEffect2;
+          exports.useEffect = useEffect5;
           exports.useId = useId;
           exports.useImperativeHandle = useImperativeHandle;
           exports.useInsertionEffect = useInsertionEffect;
@@ -1891,7 +1891,7 @@ var App = (() => {
           exports.useMemo = useMemo2;
           exports.useReducer = useReducer;
           exports.useRef = useRef2;
-          exports.useState = useState2;
+          exports.useState = useState4;
           exports.useSyncExternalStore = useSyncExternalStore;
           exports.useTransition = useTransition;
           exports.version = ReactVersion;
@@ -2387,9 +2387,9 @@ var App = (() => {
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React2 = require_react();
+          var React8 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React2.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React8.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -3996,7 +3996,7 @@ var App = (() => {
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React2.Children.forEach(props.children, function(child) {
+                  React8.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -23586,8 +23586,11 @@ var App = (() => {
   });
 
   // renderer.js
-  var import_react = __toESM(require_react());
+  var import_react7 = __toESM(require_react());
   var import_client = __toESM(require_client());
+
+  // src/App.jsx
+  var import_react6 = __toESM(require_react());
 
   // node_modules/axios/lib/helpers/bind.js
   function bind(fn, thisArg) {
@@ -26317,8 +26320,79 @@ var App = (() => {
     mergeConfig: mergeConfig2
   } = axios_default;
 
-  // renderer.js
+  // src/data/constants.js
   var BASE_URL = "https://pokeapi.co/api/v2";
+  var TYPES = [
+    "all",
+    "normal",
+    "fire",
+    "water",
+    "grass",
+    "electric",
+    "ice",
+    "fight",
+    "poison",
+    "ground",
+    "flying",
+    "psychic",
+    "bug",
+    "rock",
+    "ghost",
+    "dragon",
+    "steel",
+    "fairy"
+  ];
+  var GENERATIONS = [
+    { gen: 0, name: "\u5168\u90E8\u4E16\u4EE3", start: 1, end: 1025 },
+    { gen: 1, name: "\u7B2C\u4E00\u4E16\u4EE3", start: 1, end: 151 },
+    { gen: 2, name: "\u7B2C\u4E8C\u4E16\u4EE3", start: 152, end: 251 },
+    { gen: 3, name: "\u7B2C\u4E09\u4E16\u4EE3", start: 252, end: 386 },
+    { gen: 4, name: "\u7B2C\u56DB\u4E16\u4EE3", start: 387, end: 493 },
+    { gen: 5, name: "\u7B2C\u4E94\u4E16\u4EE3", start: 494, end: 649 },
+    { gen: 6, name: "\u7B2C\u516D\u4E16\u4EE3", start: 650, end: 721 },
+    { gen: 7, name: "\u7B2C\u4E03\u4E16\u4EE3", start: 722, end: 809 },
+    { gen: 8, name: "\u7B2C\u516B\u4E16\u4EE3", start: 810, end: 905 },
+    { gen: 9, name: "\u7B2C\u4E5D\u4E16\u4EE3", start: 906, end: 1025 }
+  ];
+  var TYPE_COLORS = {
+    normal: "#A8A878",
+    fire: "#F08030",
+    water: "#6890F0",
+    grass: "#78C850",
+    electric: "#F8D030",
+    ice: "#98D8D8",
+    fight: "#C03028",
+    poison: "#A040A0",
+    ground: "#E0C068",
+    flying: "#A890F0",
+    psychic: "#F85888",
+    bug: "#A8B820",
+    rock: "#B8A038",
+    ghost: "#705898",
+    dragon: "#7038F8",
+    steel: "#B8B8D0",
+    fairy: "#EE99AC"
+  };
+  var TYPE_NAMES_ZH = {
+    all: "\u5168\u90E8",
+    normal: "\u4E00\u822C",
+    fire: "\u706B",
+    water: "\u6C34",
+    grass: "\u8349",
+    electric: "\u7535",
+    ice: "\u51B0",
+    fight: "\u683C\u6597",
+    poison: "\u6BD2",
+    ground: "\u5730\u9762",
+    flying: "\u98DE\u884C",
+    psychic: "\u8D85\u80FD\u529B",
+    bug: "\u866B",
+    rock: "\u5CA9\u77F3",
+    ghost: "\u5E7D\u7075",
+    dragon: "\u9F99",
+    steel: "\u94A2",
+    fairy: "\u5996\u7CBE"
+  };
   var POKEMON_NAMES_ZH = {
     bulbasaur: "\u5999\u86D9\u79CD\u5B50",
     ivysaur: "\u5999\u86D9\u8349",
@@ -26472,77 +26546,6 @@ var App = (() => {
     mewtwo: "\u8D85\u68A6",
     mew: "\u68A6\u5E7B"
   };
-  var TYPES = [
-    "all",
-    "normal",
-    "fire",
-    "water",
-    "grass",
-    "electric",
-    "ice",
-    "fight",
-    "poison",
-    "ground",
-    "flying",
-    "psychic",
-    "bug",
-    "rock",
-    "ghost",
-    "dragon",
-    "steel",
-    "fairy"
-  ];
-  var GENERATIONS = [
-    { gen: 0, name: "\u5168\u90E8\u4E16\u4EE3", start: 1, end: 1025 },
-    { gen: 1, name: "\u7B2C\u4E00\u4E16\u4EE3", start: 1, end: 151 },
-    { gen: 2, name: "\u7B2C\u4E8C\u4E16\u4EE3", start: 152, end: 251 },
-    { gen: 3, name: "\u7B2C\u4E09\u4E16\u4EE3", start: 252, end: 386 },
-    { gen: 4, name: "\u7B2C\u56DB\u4E16\u4EE3", start: 387, end: 493 },
-    { gen: 5, name: "\u7B2C\u4E94\u4E16\u4EE3", start: 494, end: 649 },
-    { gen: 6, name: "\u7B2C\u516D\u4E16\u4EE3", start: 650, end: 721 },
-    { gen: 7, name: "\u7B2C\u4E03\u4E16\u4EE3", start: 722, end: 809 },
-    { gen: 8, name: "\u7B2C\u516B\u4E16\u4EE3", start: 810, end: 905 },
-    { gen: 9, name: "\u7B2C\u4E5D\u4E16\u4EE3", start: 906, end: 1025 }
-  ];
-  var TYPE_COLORS = {
-    normal: "#A8A878",
-    fire: "#F08030",
-    water: "#6890F0",
-    grass: "#78C850",
-    electric: "#F8D030",
-    ice: "#98D8D8",
-    fight: "#C03028",
-    poison: "#A040A0",
-    ground: "#E0C068",
-    flying: "#A890F0",
-    psychic: "#F85888",
-    bug: "#A8B820",
-    rock: "#B8A038",
-    ghost: "#705898",
-    dragon: "#7038F8",
-    steel: "#B8B8D0",
-    fairy: "#EE99AC"
-  };
-  var TYPE_NAMES_ZH = {
-    all: "\u5168\u90E8",
-    normal: "\u4E00\u822C",
-    fire: "\u706B",
-    water: "\u6C34",
-    grass: "\u8349",
-    electric: "\u7535",
-    ice: "\u51B0",
-    fight: "\u683C\u6597",
-    poison: "\u6BD2",
-    ground: "\u5730\u9762",
-    flying: "\u98DE\u884C",
-    psychic: "\u8D85\u80FD\u529B",
-    bug: "\u866B",
-    rock: "\u5CA9\u77F3",
-    ghost: "\u5E7D\u7075",
-    dragon: "\u9F99",
-    steel: "\u94A2",
-    fairy: "\u5996\u7CBE"
-  };
   var TYPE_CHART = {
     normal: { rock: 0.5, ghost: 0, steel: 0.5 },
     fire: { fire: 0.5, water: 0.5, grass: 2, ice: 2, bug: 2, rock: 0.5, dragon: 0.5, steel: 2 },
@@ -26562,72 +26565,6 @@ var App = (() => {
     steel: { fire: 0.5, water: 0.5, electric: 0.5, ice: 2, rock: 2, steel: 0.5, fairy: 2 },
     fairy: { fire: 0.5, fighting: 2, poison: 0.5, dragon: 2, dark: 2, steel: 0.5 }
   };
-  var ITEMS_PER_PAGE = 50;
-  function loadFavorites() {
-    try {
-      const stored = localStorage.getItem("pokemonFavorites");
-      return stored ? new Set(JSON.parse(stored)) : /* @__PURE__ */ new Set();
-    } catch {
-      return /* @__PURE__ */ new Set();
-    }
-  }
-  function saveFavorites(favorites) {
-    try {
-      localStorage.setItem("pokemonFavorites", JSON.stringify(Array.from(favorites)));
-    } catch {
-    }
-  }
-  async function fetchEvolutionChain(pokemonId) {
-    try {
-      let parseChainNode = function(node) {
-        if (!node) return;
-        const urlParts = node.species.url.split("/");
-        const id = parseInt(urlParts[urlParts.length - 2], 10);
-        chain.push({
-          name: node.species.name,
-          id
-        });
-        if (node.evolves_to && node.evolves_to.length > 0) {
-          node.evolves_to.forEach((evolution) => {
-            parseChainNode(evolution);
-          });
-        }
-      };
-      const speciesRes = await axios_default.get(`${BASE_URL}/pokemon-species/${pokemonId}`);
-      const evolutionChainUrl = speciesRes.data.evolution_chain.url;
-      const chainRes = await axios_default.get(evolutionChainUrl);
-      const chainData = chainRes.data.chain;
-      const chain = [];
-      parseChainNode(chainData);
-      return { chain };
-    } catch (error) {
-      console.error("\u83B7\u53D6\u8FDB\u5316\u94FE\u5931\u8D25:", error);
-      return { chain: [] };
-    }
-  }
-  function HeartIcon({ filled, onClick, size = 24 }) {
-    return /* @__PURE__ */ import_react.default.createElement(
-      "svg",
-      {
-        width: size,
-        height: size,
-        viewBox: "0 0 24 24",
-        fill: filled ? "#ff4757" : "none",
-        stroke: "#ff4757",
-        strokeWidth: "2",
-        strokeLinecap: "round",
-        strokeLinejoin: "round",
-        onClick,
-        style: {
-          cursor: "pointer",
-          transition: "transform 0.2s, fill 0.2s"
-        },
-        onMouseEnter: (e) => e.currentTarget.style.transform = "scale(1.1)",
-        onMouseLeave: (e) => e.currentTarget.style.transform = "scale(1)"
-      },
-      /* @__PURE__ */ import_react.default.createElement("path", { d: "M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" })
-    );
-  }
   var STAT_NAMES_ZH = {
     "hp": "HP",
     "attack": "\u653B\u51FB",
@@ -26637,793 +26574,9 @@ var App = (() => {
     "speed": "\u901F\u5EA6"
   };
   var STAT_ORDER = ["hp", "attack", "defense", "special-attack", "special-defense", "speed"];
-  function StatsRadarChart({ stats, color }) {
-    const canvasRef = (0, import_react.useRef)(null);
-    (0, import_react.useEffect)(() => {
-      if (!canvasRef.current || !stats || stats.length === 0) return;
-      const canvas = canvasRef.current;
-      const ctx = canvas.getContext("2d");
-      const width = canvas.width;
-      const height = canvas.height;
-      const centerX = width / 2;
-      const centerY = height / 2;
-      const maxRadius = Math.min(width, height) / 2 - 40;
-      const maxStat = 200;
-      ctx.clearRect(0, 0, width, height);
-      const statMap = {};
-      stats.forEach((s) => {
-        statMap[s.stat.name] = s.base_stat;
-      });
-      const orderedStats = STAT_ORDER.map((name) => ({
-        name,
-        value: statMap[name] || 0,
-        label: STAT_NAMES_ZH[name] || name
-      }));
-      function getHexagonPoints(cx, cy, radius) {
-        const points = [];
-        for (let i = 0; i < 6; i++) {
-          const angle = Math.PI / 2 * 3 + Math.PI / 3 * i;
-          points.push({
-            x: cx + radius * Math.cos(angle),
-            y: cy + radius * Math.sin(angle)
-          });
-        }
-        return points;
-      }
-      const gridLevels = [0.2, 0.4, 0.6, 0.8, 1];
-      gridLevels.forEach((level) => {
-        const radius = maxRadius * level;
-        const points = getHexagonPoints(centerX, centerY, radius);
-        ctx.beginPath();
-        ctx.moveTo(points[0].x, points[0].y);
-        for (let i = 1; i < points.length; i++) {
-          ctx.lineTo(points[i].x, points[i].y);
-        }
-        ctx.closePath();
-        ctx.strokeStyle = level === 1 ? "rgba(0, 0, 0, 0.3)" : "rgba(0, 0, 0, 0.1)";
-        ctx.lineWidth = level === 1 ? 1.5 : 0.5;
-        ctx.stroke();
-      });
-      const outerPoints = getHexagonPoints(centerX, centerY, maxRadius);
-      outerPoints.forEach((point) => {
-        ctx.beginPath();
-        ctx.moveTo(centerX, centerY);
-        ctx.lineTo(point.x, point.y);
-        ctx.strokeStyle = "rgba(0, 0, 0, 0.1)";
-        ctx.lineWidth = 0.5;
-        ctx.stroke();
-      });
-      const dataPoints = orderedStats.map((stat, i) => {
-        const value = Math.min(stat.value, maxStat);
-        const radius = value / maxStat * maxRadius;
-        const angle = Math.PI / 2 * 3 + Math.PI / 3 * i;
-        return {
-          x: centerX + radius * Math.cos(angle),
-          y: centerY + radius * Math.sin(angle),
-          value: stat.value,
-          label: stat.label
-        };
-      });
-      ctx.beginPath();
-      ctx.moveTo(dataPoints[0].x, dataPoints[0].y);
-      for (let i = 1; i < dataPoints.length; i++) {
-        ctx.lineTo(dataPoints[i].x, dataPoints[i].y);
-      }
-      ctx.closePath();
-      ctx.fillStyle = color ? `${color}40` : "rgba(99, 102, 241, 0.3)";
-      ctx.fill();
-      ctx.strokeStyle = color || "#6366f1";
-      ctx.lineWidth = 2;
-      ctx.stroke();
-      dataPoints.forEach((point, i) => {
-        ctx.beginPath();
-        ctx.arc(point.x, point.y, 4, 0, Math.PI * 2);
-        ctx.fillStyle = color || "#6366f1";
-        ctx.fill();
-        ctx.strokeStyle = "#fff";
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-        ctx.font = "bold 11px -apple-system, sans-serif";
-        ctx.fillStyle = "#333";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        const outerPoint = outerPoints[i];
-        const offsetX = (outerPoint.x - centerX) * 0.15;
-        const offsetY = (outerPoint.y - centerY) * 0.15;
-        ctx.fillText(point.value.toString(), point.x + offsetX, point.y + offsetY - 8);
-      });
-      ctx.font = "bold 12px -apple-system, sans-serif";
-      ctx.fillStyle = "#555";
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      orderedStats.forEach((stat, i) => {
-        const outerPoint = outerPoints[i];
-        const labelOffsetX = (outerPoint.x - centerX) * 0.25;
-        const labelOffsetY = (outerPoint.y - centerY) * 0.25;
-        ctx.fillText(stat.label, centerX + labelOffsetX * 2, centerY + labelOffsetY * 2);
-      });
-    }, [stats, color]);
-    return /* @__PURE__ */ import_react.default.createElement(
-      "canvas",
-      {
-        ref: canvasRef,
-        width: 250,
-        height: 250,
-        style: { display: "block" }
-      }
-    );
-  }
-  function App() {
-    const [pokemonList, setPokemonList] = (0, import_react.useState)([]);
-    const [searchQuery, setSearchQuery] = (0, import_react.useState)("");
-    const [selectedType, setSelectedType] = (0, import_react.useState)("all");
-    const [selectedGen, setSelectedGen] = (0, import_react.useState)(0);
-    const [showFavoritesOnly, setShowFavoritesOnly] = (0, import_react.useState)(false);
-    const [favorites, setFavorites] = (0, import_react.useState)(() => loadFavorites());
-    const [selectedPokemon, setSelectedPokemon] = (0, import_react.useState)(null);
-    const [loading, setLoading] = (0, import_react.useState)(true);
-    const [error, setError] = (0, import_react.useState)(null);
-    const [currentPage, setCurrentPage] = (0, import_react.useState)(1);
-    const [totalCount, setTotalCount] = (0, import_react.useState)(0);
-    const [showTypeChart, setShowTypeChart] = (0, import_react.useState)(false);
-    const [selectedAttackType, setSelectedAttackType] = (0, import_react.useState)("normal");
-    const [compareList, setCompareList] = (0, import_react.useState)([]);
-    const [showCompare, setShowCompare] = (0, import_react.useState)(false);
-    (0, import_react.useEffect)(() => {
-      async function fetchPokemonCount() {
-        try {
-          const response = await axios_default.get(`${BASE_URL}/pokemon?limit=1`);
-          setTotalCount(response.data.count);
-        } catch (err) {
-          console.error("\u83B7\u53D6\u603B\u6570\u5931\u8D25:", err);
-          setTotalCount(1025);
-        }
-      }
-      fetchPokemonCount();
-    }, []);
-    (0, import_react.useEffect)(() => {
-      async function fetchPokemon() {
-        try {
-          setLoading(true);
-          const limit = totalCount > 0 ? totalCount : 1025;
-          const response = await axios_default.get(`${BASE_URL}/pokemon?limit=${limit}`);
-          const pokemonDetails = await Promise.all(
-            response.data.results.map(async (p, idx) => {
-              const detailRes = await axios_default.get(p.url);
-              return {
-                name: p.name,
-                id: idx + 1,
-                types: detailRes.data.types.map((t) => t.type.name)
-              };
-            })
-          );
-          setPokemonList(pokemonDetails);
-          setError(null);
-        } catch (err) {
-          setError("\u52A0\u8F7D\u5931\u8D25\uFF1A" + err.message);
-        } finally {
-          setLoading(false);
-        }
-      }
-      if (totalCount > 0 || totalCount === 0) {
-        fetchPokemon();
-      }
-    }, [totalCount]);
-    const filteredList = (0, import_react.useMemo)(() => {
-      let filtered = [...pokemonList];
-      if (selectedGen > 0) {
-        const gen = GENERATIONS.find((g) => g.gen === selectedGen);
-        if (gen) {
-          filtered = filtered.filter((p) => p.id >= gen.start && p.id <= gen.end);
-        }
-      }
-      if (showFavoritesOnly) {
-        filtered = filtered.filter((p) => favorites.has(p.id));
-      }
-      if (selectedType && selectedType !== "all") {
-        filtered = filtered.filter((p) => p.types.includes(selectedType));
-      }
-      if (searchQuery && searchQuery.trim()) {
-        const lowerQuery = searchQuery.toLowerCase().trim();
-        filtered = filtered.filter((p) => {
-          const nameMatch = p.name.toLowerCase().includes(lowerQuery);
-          const idMatch = p.id.toString() === lowerQuery;
-          return nameMatch || idMatch;
-        });
-      }
-      return filtered;
-    }, [pokemonList, selectedGen, showFavoritesOnly, selectedType, searchQuery, favorites]);
-    const paginatedList = (0, import_react.useMemo)(() => {
-      const start = (currentPage - 1) * ITEMS_PER_PAGE;
-      return filteredList.slice(start, start + ITEMS_PER_PAGE);
-    }, [filteredList, currentPage]);
-    const totalPages = Math.ceil(filteredList.length / ITEMS_PER_PAGE);
-    (0, import_react.useEffect)(() => {
-      setCurrentPage(1);
-    }, [selectedGen, selectedType, searchQuery, showFavoritesOnly]);
-    async function selectPokemon(pokemon) {
-      try {
-        setLoading(true);
-        const response = await axios_default.get(`${BASE_URL}/pokemon/${pokemon.id}`);
-        setSelectedPokemon(response.data);
-        setError(null);
-      } catch (err) {
-        setError("\u52A0\u8F7D\u8BE6\u60C5\u5931\u8D25\uFF1A" + err.message);
-      } finally {
-        setLoading(false);
-      }
-    }
-    function goBack() {
-      setSelectedPokemon(null);
-    }
-    function toggleFavorite(pokemonId) {
-      const newFavorites = new Set(favorites);
-      if (newFavorites.has(pokemonId)) {
-        newFavorites.delete(pokemonId);
-      } else {
-        newFavorites.add(pokemonId);
-      }
-      setFavorites(newFavorites);
-      saveFavorites(newFavorites);
-    }
-    function handleSearch(query) {
-      setSearchQuery(query);
-    }
-    function handleTypeChange(type) {
-      setSelectedType(type);
-    }
-    function handleGenChange(gen) {
-      setSelectedGen(parseInt(gen));
-    }
-    function handleFavoritesToggle(showOnly) {
-      setShowFavoritesOnly(showOnly);
-    }
-    function handlePageChange(page) {
-      setCurrentPage(page);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-    function addToCompare(pokemon) {
-      if (compareList.length >= 2) return;
-      if (compareList.some((p) => p.id === pokemon.id)) return;
-      setCompareList([...compareList, pokemon]);
-    }
-    function removeFromCompare(pokemonId) {
-      setCompareList(compareList.filter((p) => p.id !== pokemonId));
-    }
-    function clearCompare() {
-      setCompareList([]);
-    }
-    if (loading && !selectedPokemon && pokemonList.length === 0) {
-      return /* @__PURE__ */ import_react.default.createElement("div", { style: styles.center }, /* @__PURE__ */ import_react.default.createElement("div", { style: styles.spinner }), /* @__PURE__ */ import_react.default.createElement("p", { style: { marginTop: 20, color: "#666" } }, "\u52A0\u8F7D\u4E2D... \u6B63\u5728\u83B7\u53D6 ", totalCount || 1025, " \u53EA\u5B9D\u53EF\u68A6"));
-    }
-    if (error && !selectedPokemon) {
-      return /* @__PURE__ */ import_react.default.createElement("div", { style: styles.center }, /* @__PURE__ */ import_react.default.createElement("p", { style: { color: "#FF5252", fontSize: 18 } }, "\u274C ", error));
-    }
-    if (selectedPokemon) {
-      return /* @__PURE__ */ import_react.default.createElement(
-        DetailView,
-        {
-          pokemon: selectedPokemon,
-          onBack: goBack,
-          loading,
-          onSelect: selectPokemon,
-          compareList,
-          onAddToCompare: addToCompare,
-          onRemoveFromCompare: removeFromCompare,
-          showCompare,
-          onShowCompare: setShowCompare
-        }
-      );
-    }
-    return /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement(
-      ListView,
-      {
-        pokemonList: paginatedList,
-        searchQuery,
-        selectedType,
-        selectedGen,
-        onSearch: handleSearch,
-        onTypeChange: handleTypeChange,
-        onGenChange: handleGenChange,
-        onSelect: selectPokemon,
-        favorites,
-        onToggleFavorite: toggleFavorite,
-        showFavoritesOnly,
-        onFavoritesToggle: handleFavoritesToggle,
-        totalCount: filteredList.length,
-        currentPage,
-        totalPages,
-        onPageChange: handlePageChange,
-        showTypeChart,
-        onShowTypeChart: setShowTypeChart,
-        attackType: selectedAttackType,
-        onAttackTypeChange: setSelectedAttackType,
-        compareList,
-        onShowCompare: setShowCompare
-      }
-    ), /* @__PURE__ */ import_react.default.createElement(
-      TypeChartModal,
-      {
-        show: showTypeChart,
-        attackType: selectedAttackType,
-        onAttackTypeChange: setSelectedAttackType,
-        onClose: () => setShowTypeChart(false)
-      }
-    ), showCompare && compareList.length === 2 && /* @__PURE__ */ import_react.default.createElement(
-      CompareView,
-      {
-        compareList,
-        onClose: () => setShowCompare(false)
-      }
-    ));
-  }
-  function TypeChartModal({ show, attackType, onAttackTypeChange, onClose }) {
-    if (!show) return null;
-    const defenseTypes = Object.keys(TYPE_NAMES_ZH).filter((t) => t !== "all");
-    const getEffectiveness = (attack, defense) => {
-      const chart = TYPE_CHART[attack];
-      if (!chart) return 1;
-      return chart[defense] !== void 0 ? chart[defense] : 1;
-    };
-    const getEffectStyle = (effect) => {
-      if (effect === 2) return { backgroundColor: "#4ade80", color: "#166534" };
-      if (effect === 0.5) return { backgroundColor: "#f87171", color: "#7f1d1d" };
-      if (effect === 0) return { backgroundColor: "#9ca3af", color: "#374151" };
-      return { backgroundColor: "#ffffff", color: "#374151" };
-    };
-    const getEffectText = (effect) => {
-      if (effect === 2) return "2x \u6709\u6548";
-      if (effect === 0.5) return "0.5x \u51CF\u534A";
-      if (effect === 0) return "0x \u65E0\u6548";
-      return "1x \u6B63\u5E38";
-    };
-    return /* @__PURE__ */ import_react.default.createElement("div", { style: modalStyles.overlay, onClick: onClose }, /* @__PURE__ */ import_react.default.createElement("div", { style: modalStyles.modal, onClick: (e) => e.stopPropagation() }, /* @__PURE__ */ import_react.default.createElement("div", { style: modalStyles.header }, /* @__PURE__ */ import_react.default.createElement("h2", { style: modalStyles.title }, "\u{1F3AF} \u5C5E\u6027\u76F8\u514B\u8868"), /* @__PURE__ */ import_react.default.createElement("button", { onClick: onClose, style: modalStyles.closeBtn }, "\u2715")), /* @__PURE__ */ import_react.default.createElement("div", { style: modalStyles.content }, /* @__PURE__ */ import_react.default.createElement("div", { style: modalStyles.selectRow }, /* @__PURE__ */ import_react.default.createElement("label", { style: modalStyles.label }, "\u653B\u51FB\u5C5E\u6027\uFF1A"), /* @__PURE__ */ import_react.default.createElement(
-      "select",
-      {
-        value: attackType,
-        onChange: (e) => onAttackTypeChange(e.target.value),
-        style: modalStyles.select
-      },
-      defenseTypes.map((type) => /* @__PURE__ */ import_react.default.createElement("option", { key: type, value: type }, TYPE_NAMES_ZH[type]))
-    )), /* @__PURE__ */ import_react.default.createElement("div", { style: modalStyles.tableWrapper }, /* @__PURE__ */ import_react.default.createElement("table", { style: modalStyles.table }, /* @__PURE__ */ import_react.default.createElement("thead", null, /* @__PURE__ */ import_react.default.createElement("tr", null, /* @__PURE__ */ import_react.default.createElement("th", { style: modalStyles.th }, "\u9632\u5FA1\u5C5E\u6027"), /* @__PURE__ */ import_react.default.createElement("th", { style: modalStyles.th }, "\u6548\u679C"))), /* @__PURE__ */ import_react.default.createElement("tbody", null, defenseTypes.map((defense) => {
-      const effect = getEffectiveness(attackType, defense);
-      return /* @__PURE__ */ import_react.default.createElement("tr", { key: defense }, /* @__PURE__ */ import_react.default.createElement("td", { style: modalStyles.td }, /* @__PURE__ */ import_react.default.createElement("span", { style: {
-        ...modalStyles.typeBadge,
-        backgroundColor: TYPE_COLORS[defense] || "#999"
-      } }, TYPE_NAMES_ZH[defense])), /* @__PURE__ */ import_react.default.createElement("td", { style: { ...modalStyles.td, ...modalStyles.effectCell } }, /* @__PURE__ */ import_react.default.createElement("span", { style: { ...modalStyles.effectBadge, ...getEffectStyle(effect) } }, getEffectText(effect))));
-    })))))));
-  }
-  function ListView({ pokemonList, searchQuery, selectedType, selectedGen, onSearch, onTypeChange, onGenChange, onSelect, favorites, onToggleFavorite, showFavoritesOnly, onFavoritesToggle, totalCount, currentPage, totalPages, onPageChange, showTypeChart, onShowTypeChart, attackType, onAttackTypeChange, compareList, onShowCompare }) {
-    return /* @__PURE__ */ import_react.default.createElement("div", { style: styles.container }, /* @__PURE__ */ import_react.default.createElement("header", { style: styles.header }, /* @__PURE__ */ import_react.default.createElement("h1", { style: styles.title }, "\u{1F43E} \u5B9D\u53EF\u68A6\u56FE\u9274"), /* @__PURE__ */ import_react.default.createElement("p", { style: styles.subtitle }, "\u5168\u4E16\u4EE3 1000+ \u53EA\u5B9D\u53EF\u68A6")), /* @__PURE__ */ import_react.default.createElement("div", { style: styles.filterContainer }, /* @__PURE__ */ import_react.default.createElement("div", { style: styles.searchContainer }, /* @__PURE__ */ import_react.default.createElement(
-      "input",
-      {
-        type: "text",
-        placeholder: "\u641C\u7D22\u5B9D\u53EF\u68A6\uFF08\u540D\u79F0\u6216\u7F16\u53F7\uFF09...",
-        value: searchQuery,
-        onChange: (e) => onSearch(e.target.value),
-        style: styles.searchInput
-      }
-    ), searchQuery && /* @__PURE__ */ import_react.default.createElement("button", { onClick: () => onSearch(""), style: styles.clearButton }, "\u2715")), /* @__PURE__ */ import_react.default.createElement("div", { style: styles.filterRow }, /* @__PURE__ */ import_react.default.createElement("div", { style: styles.filterItem }, /* @__PURE__ */ import_react.default.createElement("label", { style: styles.filterLabel }, "\u4E16\u4EE3\uFF1A"), /* @__PURE__ */ import_react.default.createElement("select", { value: selectedGen, onChange: (e) => onGenChange(e.target.value), style: styles.filterSelect }, GENERATIONS.map((g) => /* @__PURE__ */ import_react.default.createElement("option", { key: g.gen, value: g.gen }, g.name)))), /* @__PURE__ */ import_react.default.createElement("div", { style: styles.filterItem }, /* @__PURE__ */ import_react.default.createElement("label", { style: styles.filterLabel }, "\u5C5E\u6027\uFF1A"), /* @__PURE__ */ import_react.default.createElement("select", { value: selectedType, onChange: (e) => onTypeChange(e.target.value), style: styles.filterSelect }, TYPES.map((type) => /* @__PURE__ */ import_react.default.createElement("option", { key: type, value: type }, TYPE_NAMES_ZH[type])))), /* @__PURE__ */ import_react.default.createElement("div", { style: styles.filterItem }, /* @__PURE__ */ import_react.default.createElement("label", { style: styles.checkboxLabel }, /* @__PURE__ */ import_react.default.createElement(
-      "input",
-      {
-        type: "checkbox",
-        checked: showFavoritesOnly,
-        onChange: (e) => onFavoritesToggle(e.target.checked)
-      }
-    ), "\u2764\uFE0F \u53EA\u770B\u6536\u85CF (", favorites.size, ")")), /* @__PURE__ */ import_react.default.createElement(
-      "button",
-      {
-        onClick: () => onShowTypeChart(true),
-        style: styles.typeChartButton
-      },
-      "\u{1F3AF} \u5C5E\u6027\u76F8\u514B\u8868"
-    ), compareList && compareList.length === 2 && /* @__PURE__ */ import_react.default.createElement(
-      "button",
-      {
-        onClick: () => onShowCompare(true),
-        style: styles.viewCompareButton
-      },
-      "\u2696\uFE0F \u67E5\u770B\u5BF9\u6BD4 (",
-      compareList.length,
-      "/2)"
-    )), /* @__PURE__ */ import_react.default.createElement("div", { style: styles.resultCount }, "\u663E\u793A ", totalCount, " \u53EA\u5B9D\u53EF\u68A6", selectedGen > 0 && ` \xB7 ${GENERATIONS.find((g) => g.gen === selectedGen)?.name}`, selectedType !== "all" && ` \xB7 ${TYPE_NAMES_ZH[selectedType]}\u5C5E\u6027`, showFavoritesOnly && " \xB7 \u4EC5\u6536\u85CF")), /* @__PURE__ */ import_react.default.createElement("div", { style: styles.grid }, pokemonList.map((p) => /* @__PURE__ */ import_react.default.createElement("div", { key: p.id, style: styles.card, onClick: () => onSelect(p) }, /* @__PURE__ */ import_react.default.createElement(
-      "button",
-      {
-        onClick: (e) => {
-          e.stopPropagation();
-          onToggleFavorite(p.id);
-        },
-        style: styles.favoriteButton
-      },
-      /* @__PURE__ */ import_react.default.createElement(HeartIcon, { filled: favorites.has(p.id), size: 20 })
-    ), /* @__PURE__ */ import_react.default.createElement(
-      "img",
-      {
-        src: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${p.id}.png`,
-        alt: p.name,
-        style: styles.cardImage
-      }
-    ), /* @__PURE__ */ import_react.default.createElement("p", { style: styles.cardId }, "#", String(p.id).padStart(3, "0")), POKEMON_NAMES_ZH[p.name] && /* @__PURE__ */ import_react.default.createElement("p", { style: styles.cardNameZh }, POKEMON_NAMES_ZH[p.name]), /* @__PURE__ */ import_react.default.createElement("p", { style: styles.cardNameEn }, p.name.charAt(0).toUpperCase() + p.name.slice(1)), /* @__PURE__ */ import_react.default.createElement("div", { style: styles.cardTypes }, p.types.map((type, idx) => /* @__PURE__ */ import_react.default.createElement("span", { key: idx, style: { ...styles.cardTypeBadge, backgroundColor: TYPE_COLORS[type] || "#999" } }, TYPE_NAMES_ZH[type] || type)))))), pokemonList.length === 0 && /* @__PURE__ */ import_react.default.createElement("div", { style: styles.noResults }, /* @__PURE__ */ import_react.default.createElement("p", null, "\u{1F615} \u6CA1\u6709\u627E\u5230\u7B26\u5408\u6761\u4EF6\u7684\u5B9D\u53EF\u68A6")), totalPages > 1 && /* @__PURE__ */ import_react.default.createElement("div", { style: styles.pagination }, /* @__PURE__ */ import_react.default.createElement("button", { onClick: () => onPageChange(currentPage - 1), disabled: currentPage === 1, style: styles.pageButton }, "\u2190 \u4E0A\u4E00\u9875"), /* @__PURE__ */ import_react.default.createElement("span", { style: styles.pageInfo }, "\u7B2C ", currentPage, " / ", totalPages, " \u9875"), /* @__PURE__ */ import_react.default.createElement("button", { onClick: () => onPageChange(currentPage + 1), disabled: currentPage === totalPages, style: styles.pageButton }, "\u4E0B\u4E00\u9875 \u2192")));
-  }
-  function DetailView({ pokemon, onBack, loading, onSelect, compareList = [], onAddToCompare, onRemoveFromCompare, showCompare, onShowCompare }) {
-    const [evolutionChain, setEvolutionChain] = (0, import_react.useState)(null);
-    const [loadingEvolution, setLoadingEvolution] = (0, import_react.useState)(false);
-    const isInCompareList = compareList.some((p) => p.id === pokemon.id);
-    const isCompareListFull = compareList.length >= 2;
-    (0, import_react.useEffect)(() => {
-      if (!pokemon) return;
-      async function loadEvolutionChain() {
-        setLoadingEvolution(true);
-        const result = await fetchEvolutionChain(pokemon.id);
-        setEvolutionChain(result);
-        setLoadingEvolution(false);
-      }
-      loadEvolutionChain();
-    }, [pokemon?.id]);
-    const handleEvolutionClick = (evo) => {
-      if (evo.id !== pokemon.id && onSelect) {
-        onSelect(evo);
-      }
-    };
-    if (loading) {
-      return /* @__PURE__ */ import_react.default.createElement("div", { style: styles.center }, /* @__PURE__ */ import_react.default.createElement("div", { style: styles.spinner }));
-    }
-    const types = pokemon.types.map((t) => t.type.name);
-    const mainType = types[0];
-    const filteredChain = evolutionChain?.chain?.filter((evo) => evo.id !== pokemon.id);
-    return /* @__PURE__ */ import_react.default.createElement("div", { style: { ...styles.container, backgroundColor: TYPE_COLORS[mainType] + "20" } }, /* @__PURE__ */ import_react.default.createElement("header", { style: styles.header }, /* @__PURE__ */ import_react.default.createElement("div", { style: { display: "flex", alignItems: "center", gap: 10, marginBottom: 10 } }, /* @__PURE__ */ import_react.default.createElement("button", { onClick: onBack, style: styles.backButton }, "\u2190 \u8FD4\u56DE"), /* @__PURE__ */ import_react.default.createElement(
-      "button",
-      {
-        onClick: () => {
-          if (isInCompareList) {
-            onRemoveFromCompare && onRemoveFromCompare(pokemon.id);
-          } else {
-            onAddToCompare && onAddToCompare(pokemon);
-          }
-        },
-        disabled: !isInCompareList && isCompareListFull,
-        style: {
-          ...styles.compareButton,
-          backgroundColor: isInCompareList ? "#ef4444" : isCompareListFull ? "#9ca3af" : "#10b981",
-          cursor: isCompareListFull && !isInCompareList ? "not-allowed" : "pointer"
-        }
-      },
-      isInCompareList ? "\u79FB\u51FA\u5BF9\u6BD4" : "\u52A0\u5165\u5BF9\u6BD4",
-      " (",
-      compareList.length,
-      "/2)"
-    ), compareList.length === 2 && /* @__PURE__ */ import_react.default.createElement(
-      "button",
-      {
-        onClick: () => onShowCompare && onShowCompare(true),
-        style: styles.viewCompareButton
-      },
-      "\u2696\uFE0F \u67E5\u770B\u5BF9\u6BD4"
-    )), /* @__PURE__ */ import_react.default.createElement("h1", { style: styles.title }, "#", String(pokemon.id).padStart(3, "0"), " ", pokemon.name.toUpperCase())), /* @__PURE__ */ import_react.default.createElement("div", { style: styles.detailContent }, /* @__PURE__ */ import_react.default.createElement(
-      "img",
-      {
-        src: pokemon.sprites.other["official-artwork"].front_default,
-        alt: pokemon.name,
-        style: styles.detailImage
-      }
-    ), /* @__PURE__ */ import_react.default.createElement("div", { style: styles.detailInfo }, /* @__PURE__ */ import_react.default.createElement("div", { style: styles.typeBadges }, types.map((type, idx) => /* @__PURE__ */ import_react.default.createElement("span", { key: idx, style: { ...styles.typeBadge, backgroundColor: TYPE_COLORS[type] } }, TYPE_NAMES_ZH[type]))), /* @__PURE__ */ import_react.default.createElement("div", { style: styles.infoRow }, /* @__PURE__ */ import_react.default.createElement("span", null, "\u8EAB\u9AD8: ", (pokemon.height / 10).toFixed(1), "m"), /* @__PURE__ */ import_react.default.createElement("span", null, "\u4F53\u91CD: ", (pokemon.weight / 10).toFixed(1), "kg")), /* @__PURE__ */ import_react.default.createElement("div", { style: styles.abilitiesSection }, /* @__PURE__ */ import_react.default.createElement("h4", { style: styles.abilitiesTitle }, "\u7279\u6027\uFF1A"), /* @__PURE__ */ import_react.default.createElement("div", { style: styles.abilitiesList }, pokemon.abilities?.map((abilityInfo, idx) => {
-      const abilityName = abilityInfo.ability.name.charAt(0).toUpperCase() + abilityInfo.ability.name.slice(1);
-      const isHidden = abilityInfo.is_hidden;
-      return /* @__PURE__ */ import_react.default.createElement(
-        "span",
-        {
-          key: idx,
-          style: {
-            ...styles.abilityBadge,
-            backgroundColor: isHidden ? "#9ca3af" : "#6366f1"
-          }
-        },
-        abilityName,
-        isHidden && /* @__PURE__ */ import_react.default.createElement("span", { style: styles.hiddenTag }, " (\u9690\u85CF)")
-      );
-    }))), /* @__PURE__ */ import_react.default.createElement("div", { style: styles.statsSection }, /* @__PURE__ */ import_react.default.createElement("h4", { style: styles.statsTitle }, "\u79CD\u65CF\u503C\uFF1A"), /* @__PURE__ */ import_react.default.createElement("div", { style: styles.radarChartContainer }, /* @__PURE__ */ import_react.default.createElement(StatsRadarChart, { stats: pokemon.stats, color: TYPE_COLORS[mainType] })), /* @__PURE__ */ import_react.default.createElement("div", { style: styles.statsList }, pokemon.stats?.map((statInfo, idx) => {
-      const statName = STAT_NAMES_ZH[statInfo.stat.name] || statInfo.stat.name;
-      const percentage = Math.min(statInfo.base_stat / 200 * 100, 100);
-      return /* @__PURE__ */ import_react.default.createElement("div", { key: idx, style: styles.statRow }, /* @__PURE__ */ import_react.default.createElement("span", { style: styles.statName }, statName), /* @__PURE__ */ import_react.default.createElement("div", { style: styles.statBarBg }, /* @__PURE__ */ import_react.default.createElement(
-        "div",
-        {
-          style: {
-            ...styles.statBar,
-            width: `${percentage}%`,
-            backgroundColor: TYPE_COLORS[mainType] || "#6366f1"
-          }
-        }
-      )), /* @__PURE__ */ import_react.default.createElement("span", { style: styles.statValue }, statInfo.base_stat));
-    }))))), loadingEvolution && /* @__PURE__ */ import_react.default.createElement("div", { style: styles.evolutionSection }, /* @__PURE__ */ import_react.default.createElement("p", { style: styles.evolutionLoading }, "\u52A0\u8F7D\u8FDB\u5316\u94FE...")), !loadingEvolution && evolutionChain?.chain?.length > 1 && /* @__PURE__ */ import_react.default.createElement("div", { style: styles.evolutionSection }, /* @__PURE__ */ import_react.default.createElement("h3", { style: styles.evolutionTitle }, "\u8FDB\u5316\u94FE\uFF1A"), /* @__PURE__ */ import_react.default.createElement("div", { style: styles.evolutionChain }, evolutionChain.chain.map((evo, idx) => /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, { key: evo.id }, /* @__PURE__ */ import_react.default.createElement(
-      "div",
-      {
-        style: {
-          ...styles.evolutionItem,
-          cursor: evo.id !== pokemon.id ? "pointer" : "default",
-          opacity: evo.id === pokemon.id ? 1 : 0.7,
-          transform: evo.id === pokemon.id ? "scale(1.1)" : "scale(1)"
-        },
-        onClick: () => evo.id !== pokemon.id && handleEvolutionClick(evo)
-      },
-      /* @__PURE__ */ import_react.default.createElement(
-        "img",
-        {
-          src: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${evo.id}.png`,
-          alt: evo.name,
-          style: styles.evolutionImage
-        }
-      ),
-      /* @__PURE__ */ import_react.default.createElement("p", { style: styles.evolutionName }, evo.name.charAt(0).toUpperCase() + evo.name.slice(1)),
-      /* @__PURE__ */ import_react.default.createElement("p", { style: styles.evolutionId }, "#", String(evo.id).padStart(3, "0"))
-    ), idx < evolutionChain.chain.length - 1 && /* @__PURE__ */ import_react.default.createElement("span", { style: styles.evolutionArrow }, "\u2192"))))), showCompare && compareList && compareList.length === 2 && /* @__PURE__ */ import_react.default.createElement(
-      CompareView,
-      {
-        compareList,
-        onClose: () => onShowCompare(false)
-      }
-    ));
-  }
-  function CompareView({ compareList, onClose }) {
-    const [pokemonDetails, setPokemonDetails] = (0, import_react.useState)([null, null]);
-    const [loading, setLoading] = (0, import_react.useState)(true);
-    (0, import_react.useEffect)(() => {
-      async function fetchDetails() {
-        if (compareList.length < 2) return;
-        setLoading(true);
-        try {
-          const details = await Promise.all([
-            axios_default.get(`${BASE_URL}/pokemon/${compareList[0].id}`),
-            axios_default.get(`${BASE_URL}/pokemon/${compareList[1].id}`)
-          ]);
-          setPokemonDetails([details[0].data, details[1].data]);
-        } catch (err) {
-          console.error("\u83B7\u53D6\u5BF9\u6BD4\u8BE6\u60C5\u5931\u8D25:", err);
-        } finally {
-          setLoading(false);
-        }
-      }
-      fetchDetails();
-    }, [compareList]);
-    if (loading || !pokemonDetails[0] || !pokemonDetails[1]) {
-      return /* @__PURE__ */ import_react.default.createElement("div", { style: compareStyles.overlay }, /* @__PURE__ */ import_react.default.createElement("div", { style: compareStyles.modal }, /* @__PURE__ */ import_react.default.createElement("div", { style: compareStyles.loading }, /* @__PURE__ */ import_react.default.createElement("div", { style: styles.spinner }), /* @__PURE__ */ import_react.default.createElement("p", { style: { marginTop: 15, color: "#666" } }, "\u52A0\u8F7D\u5BF9\u6BD4\u6570\u636E..."))));
-    }
-    const pokemon1 = pokemonDetails[0];
-    const pokemon2 = pokemonDetails[1];
-    const types1 = pokemon1.types.map((t) => t.type.name);
-    const types2 = pokemon2.types.map((t) => t.type.name);
-    const statMap1 = {};
-    const statMap2 = {};
-    pokemon1.stats.forEach((s) => {
-      statMap1[s.stat.name] = s.base_stat;
-    });
-    pokemon2.stats.forEach((s) => {
-      statMap2[s.stat.name] = s.base_stat;
-    });
-    return /* @__PURE__ */ import_react.default.createElement("div", { style: compareStyles.overlay }, /* @__PURE__ */ import_react.default.createElement("div", { style: compareStyles.modal }, /* @__PURE__ */ import_react.default.createElement("h2", { style: compareStyles.title }, "\u2694\uFE0F \u5B9D\u53EF\u68A6\u5BF9\u6BD4"), /* @__PURE__ */ import_react.default.createElement("div", { style: compareStyles.compareContainer }, /* @__PURE__ */ import_react.default.createElement("div", { style: compareStyles.pokemonSide }, /* @__PURE__ */ import_react.default.createElement(
-      "img",
-      {
-        src: pokemon1.sprites.other["official-artwork"].front_default,
-        alt: pokemon1.name,
-        style: compareStyles.pokemonImage
-      }
-    ), /* @__PURE__ */ import_react.default.createElement("h3", { style: compareStyles.pokemonName }, "#", String(pokemon1.id).padStart(3, "0"), " ", pokemon1.name.toUpperCase()), /* @__PURE__ */ import_react.default.createElement("div", { style: compareStyles.typeBadges }, types1.map((type, idx) => /* @__PURE__ */ import_react.default.createElement("span", { key: idx, style: { ...compareStyles.typeBadge, backgroundColor: TYPE_COLORS[type] } }, TYPE_NAMES_ZH[type]))), /* @__PURE__ */ import_react.default.createElement("div", { style: compareStyles.infoRow }, /* @__PURE__ */ import_react.default.createElement("span", null, "\u8EAB\u9AD8: ", (pokemon1.height / 10).toFixed(1), "m"), /* @__PURE__ */ import_react.default.createElement("span", null, "\u4F53\u91CD: ", (pokemon1.weight / 10).toFixed(1), "kg"))), /* @__PURE__ */ import_react.default.createElement("div", { style: compareStyles.vsContainer }, /* @__PURE__ */ import_react.default.createElement("span", { style: compareStyles.vsText }, "VS")), /* @__PURE__ */ import_react.default.createElement("div", { style: compareStyles.pokemonSide }, /* @__PURE__ */ import_react.default.createElement(
-      "img",
-      {
-        src: pokemon2.sprites.other["official-artwork"].front_default,
-        alt: pokemon2.name,
-        style: compareStyles.pokemonImage
-      }
-    ), /* @__PURE__ */ import_react.default.createElement("h3", { style: compareStyles.pokemonName }, "#", String(pokemon2.id).padStart(3, "0"), " ", pokemon2.name.toUpperCase()), /* @__PURE__ */ import_react.default.createElement("div", { style: compareStyles.typeBadges }, types2.map((type, idx) => /* @__PURE__ */ import_react.default.createElement("span", { key: idx, style: { ...compareStyles.typeBadge, backgroundColor: TYPE_COLORS[type] } }, TYPE_NAMES_ZH[type]))), /* @__PURE__ */ import_react.default.createElement("div", { style: compareStyles.infoRow }, /* @__PURE__ */ import_react.default.createElement("span", null, "\u8EAB\u9AD8: ", (pokemon2.height / 10).toFixed(1), "m"), /* @__PURE__ */ import_react.default.createElement("span", null, "\u4F53\u91CD: ", (pokemon2.weight / 10).toFixed(1), "kg")))), /* @__PURE__ */ import_react.default.createElement("div", { style: compareStyles.statsSection }, /* @__PURE__ */ import_react.default.createElement("h4", { style: compareStyles.statsTitle }, "\u79CD\u65CF\u503C\u5BF9\u6BD4"), STAT_ORDER.map((statName) => {
-      const value1 = statMap1[statName] || 0;
-      const value2 = statMap2[statName] || 0;
-      const maxStat = 200;
-      const percentage1 = value1 / maxStat * 100;
-      const percentage2 = value2 / maxStat * 100;
-      const isWin1 = value1 > value2;
-      const isWin2 = value2 > value1;
-      const isTie = value1 === value2;
-      return /* @__PURE__ */ import_react.default.createElement("div", { key: statName, style: compareStyles.statRow }, /* @__PURE__ */ import_react.default.createElement("div", { style: compareStyles.statLabel }, /* @__PURE__ */ import_react.default.createElement("span", { style: compareStyles.statValueLeft(isWin1) }, value1)), /* @__PURE__ */ import_react.default.createElement("div", { style: compareStyles.statBarsContainer }, /* @__PURE__ */ import_react.default.createElement("div", { style: compareStyles.statNameCenter }, STAT_NAMES_ZH[statName]), /* @__PURE__ */ import_react.default.createElement("div", { style: compareStyles.statBarsRow }, /* @__PURE__ */ import_react.default.createElement("div", { style: compareStyles.statBarWrapper }, /* @__PURE__ */ import_react.default.createElement(
-        "div",
-        {
-          style: {
-            ...compareStyles.statBarLeft,
-            width: `${percentage1}%`,
-            backgroundColor: isWin1 ? "#22c55e" : isTie ? "#6b7280" : TYPE_COLORS[types1[0]]
-          }
-        }
-      )), /* @__PURE__ */ import_react.default.createElement("div", { style: compareStyles.statBarWrapper }, /* @__PURE__ */ import_react.default.createElement(
-        "div",
-        {
-          style: {
-            ...compareStyles.statBarRight,
-            width: `${percentage2}%`,
-            backgroundColor: isWin2 ? "#22c55e" : isTie ? "#6b7280" : TYPE_COLORS[types2[0]]
-          }
-        }
-      )))), /* @__PURE__ */ import_react.default.createElement("div", { style: compareStyles.statLabel }, /* @__PURE__ */ import_react.default.createElement("span", { style: compareStyles.statValueRight(isWin2) }, value2)));
-    })), /* @__PURE__ */ import_react.default.createElement("div", { style: compareStyles.footer }, /* @__PURE__ */ import_react.default.createElement("button", { onClick: onClose, style: compareStyles.closeButton }, "\u5173\u95ED"))));
-  }
-  var compareStyles = {
-    overlay: {
-      position: "fixed",
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      backgroundColor: "rgba(0, 0, 0, 0.7)",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      zIndex: 2e3,
-      padding: 20
-    },
-    modal: {
-      backgroundColor: "#fff",
-      borderRadius: 20,
-      maxWidth: 900,
-      width: "100%",
-      maxHeight: "90vh",
-      overflowY: "auto",
-      boxShadow: "0 25px 80px rgba(0, 0, 0, 0.5)"
-    },
-    loading: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      padding: 60
-    },
-    title: {
-      textAlign: "center",
-      fontSize: 24,
-      fontWeight: "bold",
-      color: "#333",
-      margin: 0,
-      padding: "20px 20px 15px",
-      borderBottom: "1px solid #e5e7eb"
-    },
-    compareContainer: {
-      display: "flex",
-      alignItems: "flex-start",
-      justifyContent: "center",
-      padding: "20px 30px",
-      gap: 10,
-      borderBottom: "1px solid #e5e7eb"
-    },
-    pokemonSide: {
-      flex: 1,
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      padding: 15
-    },
-    pokemonImage: {
-      width: 180,
-      height: 180,
-      objectFit: "contain"
-    },
-    pokemonName: {
-      fontSize: 16,
-      fontWeight: "bold",
-      color: "#333",
-      margin: "10px 0 8px",
-      textTransform: "capitalize"
-    },
-    typeBadges: {
-      display: "flex",
-      gap: 8,
-      marginBottom: 12
-    },
-    typeBadge: {
-      padding: "4px 12px",
-      borderRadius: 12,
-      color: "#fff",
-      fontSize: 12,
-      fontWeight: "bold"
-    },
-    infoRow: {
-      display: "flex",
-      gap: 20,
-      fontSize: 13,
-      color: "#666"
-    },
-    vsContainer: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      padding: "0 15px"
-    },
-    vsText: {
-      fontSize: 28,
-      fontWeight: "bold",
-      color: "#ef4444",
-      textShadow: "2px 2px 4px rgba(0,0,0,0.2)"
-    },
-    statsSection: {
-      padding: "20px 30px"
-    },
-    statsTitle: {
-      fontSize: 16,
-      fontWeight: "bold",
-      color: "#333",
-      marginBottom: 15,
-      textAlign: "center"
-    },
-    statRow: {
-      display: "flex",
-      alignItems: "center",
-      marginBottom: 12
-    },
-    statLabel: {
-      width: 50,
-      textAlign: "center"
-    },
-    statValueLeft: (isWinner) => ({
-      fontSize: 16,
-      fontWeight: isWinner ? "bold" : "normal",
-      color: isWinner ? "#22c55e" : "#374151"
-    }),
-    statValueRight: (isWinner) => ({
-      fontSize: 16,
-      fontWeight: isWinner ? "bold" : "normal",
-      color: isWinner ? "#22c55e" : "#374151"
-    }),
-    statBarsContainer: {
-      flex: 1,
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center"
-    },
-    statNameCenter: {
-      fontSize: 12,
-      fontWeight: "bold",
-      color: "#6b7280",
-      marginBottom: 4
-    },
-    statBarsRow: {
-      display: "flex",
-      alignItems: "center",
-      width: "100%",
-      gap: 8
-    },
-    statBarWrapper: {
-      flex: 1,
-      height: 12,
-      backgroundColor: "rgba(0, 0, 0, 0.08)",
-      borderRadius: 6,
-      overflow: "hidden",
-      display: "flex"
-    },
-    statBarLeft: {
-      height: "100%",
-      borderRadius: "6px 0 0 6px",
-      marginRight: "auto",
-      transition: "width 0.3s ease"
-    },
-    statBarRight: {
-      height: "100%",
-      borderRadius: "0 6px 6px 0",
-      marginLeft: "auto",
-      transition: "width 0.3s ease"
-    },
-    footer: {
-      display: "flex",
-      justifyContent: "center",
-      padding: "15px 20px 25px",
-      borderTop: "1px solid #e5e7eb"
-    },
-    closeButton: {
-      padding: "12px 40px",
-      backgroundColor: "#6366f1",
-      color: "#fff",
-      border: "none",
-      borderRadius: 10,
-      fontSize: 16,
-      fontWeight: "bold",
-      cursor: "pointer",
-      transition: "background-color 0.2s, transform 0.1s"
-    }
-  };
+  var ITEMS_PER_PAGE = 50;
+
+  // src/styles/index.js
   var styles = {
     container: {
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
@@ -27716,8 +26869,887 @@ var App = (() => {
       textAlign: "center"
     }
   };
+  var compareStyles = {
+    overlay: {
+      position: "fixed",
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: "rgba(0, 0, 0, 0.7)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      zIndex: 2e3,
+      padding: 20
+    },
+    modal: {
+      backgroundColor: "#fff",
+      borderRadius: 20,
+      maxWidth: 900,
+      width: "100%",
+      maxHeight: "90vh",
+      overflowY: "auto",
+      boxShadow: "0 25px 80px rgba(0, 0, 0, 0.5)"
+    },
+    loading: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: 60
+    },
+    title: {
+      textAlign: "center",
+      fontSize: 24,
+      fontWeight: "bold",
+      color: "#333",
+      margin: 0,
+      padding: "20px 20px 15px",
+      borderBottom: "1px solid #e5e7eb"
+    },
+    compareContainer: {
+      display: "flex",
+      alignItems: "flex-start",
+      justifyContent: "center",
+      padding: "20px 30px",
+      gap: 10,
+      borderBottom: "1px solid #e5e7eb"
+    },
+    pokemonSide: {
+      flex: 1,
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      padding: 15
+    },
+    pokemonImage: {
+      width: 180,
+      height: 180,
+      objectFit: "contain"
+    },
+    pokemonName: {
+      fontSize: 16,
+      fontWeight: "bold",
+      color: "#333",
+      margin: "10px 0 8px",
+      textTransform: "capitalize"
+    },
+    typeBadges: {
+      display: "flex",
+      gap: 8,
+      marginBottom: 12
+    },
+    typeBadge: {
+      padding: "4px 12px",
+      borderRadius: 12,
+      color: "#fff",
+      fontSize: 12,
+      fontWeight: "bold"
+    },
+    infoRow: {
+      display: "flex",
+      gap: 20,
+      fontSize: 13,
+      color: "#666"
+    },
+    vsContainer: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: "0 15px"
+    },
+    vsText: {
+      fontSize: 28,
+      fontWeight: "bold",
+      color: "#ef4444",
+      textShadow: "2px 2px 4px rgba(0,0,0,0.2)"
+    },
+    statsSection: {
+      padding: "20px 30px"
+    },
+    statsTitle: {
+      fontSize: 16,
+      fontWeight: "bold",
+      color: "#333",
+      marginBottom: 15,
+      textAlign: "center"
+    },
+    statRow: {
+      display: "flex",
+      alignItems: "center",
+      marginBottom: 12
+    },
+    statLabel: {
+      width: 50,
+      textAlign: "center"
+    },
+    statValueLeft: (isWinner) => ({
+      fontSize: 16,
+      fontWeight: isWinner ? "bold" : "normal",
+      color: isWinner ? "#22c55e" : "#374151"
+    }),
+    statValueRight: (isWinner) => ({
+      fontSize: 16,
+      fontWeight: isWinner ? "bold" : "normal",
+      color: isWinner ? "#22c55e" : "#374151"
+    }),
+    statBarsContainer: {
+      flex: 1,
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center"
+    },
+    statNameCenter: {
+      fontSize: 12,
+      fontWeight: "bold",
+      color: "#6b7280",
+      marginBottom: 4
+    },
+    statBarsRow: {
+      display: "flex",
+      alignItems: "center",
+      width: "100%",
+      gap: 8
+    },
+    statBarWrapper: {
+      flex: 1,
+      height: 12,
+      backgroundColor: "rgba(0, 0, 0, 0.08)",
+      borderRadius: 6,
+      overflow: "hidden",
+      display: "flex"
+    },
+    statBarLeft: {
+      height: "100%",
+      borderRadius: "6px 0 0 6px",
+      marginRight: "auto",
+      transition: "width 0.3s ease"
+    },
+    statBarRight: {
+      height: "100%",
+      borderRadius: "0 6px 6px 0",
+      marginLeft: "auto",
+      transition: "width 0.3s ease"
+    },
+    footer: {
+      display: "flex",
+      justifyContent: "center",
+      padding: "15px 20px 25px",
+      borderTop: "1px solid #e5e7eb"
+    },
+    closeButton: {
+      padding: "12px 40px",
+      backgroundColor: "#6366f1",
+      color: "#fff",
+      border: "none",
+      borderRadius: 10,
+      fontSize: 16,
+      fontWeight: "bold",
+      cursor: "pointer",
+      transition: "background-color 0.2s, transform 0.1s"
+    }
+  };
+
+  // src/components/ListView.jsx
+  var import_react = __toESM(require_react());
+  function HeartIcon({ filled, onClick, size = 24 }) {
+    return /* @__PURE__ */ import_react.default.createElement(
+      "svg",
+      {
+        width: size,
+        height: size,
+        viewBox: "0 0 24 24",
+        fill: filled ? "#ff4757" : "none",
+        stroke: "#ff4757",
+        strokeWidth: "2",
+        strokeLinecap: "round",
+        strokeLinejoin: "round",
+        onClick,
+        style: {
+          cursor: "pointer",
+          transition: "transform 0.2s, fill 0.2s"
+        },
+        onMouseEnter: (e) => e.currentTarget.style.transform = "scale(1.1)",
+        onMouseLeave: (e) => e.currentTarget.style.transform = "scale(1)"
+      },
+      /* @__PURE__ */ import_react.default.createElement("path", { d: "M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" })
+    );
+  }
+  function ListView({ pokemonList, searchQuery, selectedType, selectedGen, onSearch, onTypeChange, onGenChange, onSelect, favorites, onToggleFavorite, showFavoritesOnly, onFavoritesToggle, totalCount, currentPage, totalPages, onPageChange, showTypeChart, onShowTypeChart, attackType, onAttackTypeChange, compareList, onShowCompare }) {
+    return /* @__PURE__ */ import_react.default.createElement("div", { style: styles.container }, /* @__PURE__ */ import_react.default.createElement("header", { style: styles.header }, /* @__PURE__ */ import_react.default.createElement("h1", { style: styles.title }, "\u{1F43E} \u5B9D\u53EF\u68A6\u56FE\u9274"), /* @__PURE__ */ import_react.default.createElement("p", { style: styles.subtitle }, "\u5168\u4E16\u4EE3 1000+ \u53EA\u5B9D\u53EF\u68A6")), /* @__PURE__ */ import_react.default.createElement("div", { style: styles.filterContainer }, /* @__PURE__ */ import_react.default.createElement("div", { style: styles.searchContainer }, /* @__PURE__ */ import_react.default.createElement(
+      "input",
+      {
+        type: "text",
+        placeholder: "\u641C\u7D22\u5B9D\u53EF\u68A6\uFF08\u540D\u79F0\u6216\u7F16\u53F7\uFF09...",
+        value: searchQuery,
+        onChange: (e) => onSearch(e.target.value),
+        style: styles.searchInput
+      }
+    ), searchQuery && /* @__PURE__ */ import_react.default.createElement("button", { onClick: () => onSearch(""), style: styles.clearButton }, "\u2715")), /* @__PURE__ */ import_react.default.createElement("div", { style: styles.filterRow }, /* @__PURE__ */ import_react.default.createElement("div", { style: styles.filterItem }, /* @__PURE__ */ import_react.default.createElement("label", { style: styles.filterLabel }, "\u4E16\u4EE3\uFF1A"), /* @__PURE__ */ import_react.default.createElement("select", { value: selectedGen, onChange: (e) => onGenChange(e.target.value), style: styles.filterSelect }, GENERATIONS.map((g) => /* @__PURE__ */ import_react.default.createElement("option", { key: g.gen, value: g.gen }, g.name)))), /* @__PURE__ */ import_react.default.createElement("div", { style: styles.filterItem }, /* @__PURE__ */ import_react.default.createElement("label", { style: styles.filterLabel }, "\u5C5E\u6027\uFF1A"), /* @__PURE__ */ import_react.default.createElement("select", { value: selectedType, onChange: (e) => onTypeChange(e.target.value), style: styles.filterSelect }, TYPES.map((type) => /* @__PURE__ */ import_react.default.createElement("option", { key: type, value: type }, TYPE_NAMES_ZH[type])))), /* @__PURE__ */ import_react.default.createElement("div", { style: styles.filterItem }, /* @__PURE__ */ import_react.default.createElement("label", { style: styles.checkboxLabel }, /* @__PURE__ */ import_react.default.createElement(
+      "input",
+      {
+        type: "checkbox",
+        checked: showFavoritesOnly,
+        onChange: (e) => onFavoritesToggle(e.target.checked)
+      }
+    ), "\u2764\uFE0F \u53EA\u770B\u6536\u85CF (", favorites.size, ")")), /* @__PURE__ */ import_react.default.createElement(
+      "button",
+      {
+        onClick: () => onShowTypeChart(true),
+        style: styles.typeChartButton
+      },
+      "\u{1F3AF} \u5C5E\u6027\u76F8\u514B\u8868"
+    ), compareList && compareList.length === 2 && /* @__PURE__ */ import_react.default.createElement(
+      "button",
+      {
+        onClick: () => onShowCompare(true),
+        style: styles.viewCompareButton
+      },
+      "\u2696\uFE0F \u67E5\u770B\u5BF9\u6BD4 (",
+      compareList.length,
+      "/2)"
+    )), /* @__PURE__ */ import_react.default.createElement("div", { style: styles.resultCount }, "\u663E\u793A ", totalCount, " \u53EA\u5B9D\u53EF\u68A6", selectedGen > 0 && ` \xB7 ${GENERATIONS.find((g) => g.gen === selectedGen)?.name}`, selectedType !== "all" && ` \xB7 ${TYPE_NAMES_ZH[selectedType]}\u5C5E\u6027`, showFavoritesOnly && " \xB7 \u4EC5\u6536\u85CF")), /* @__PURE__ */ import_react.default.createElement("div", { style: styles.grid }, pokemonList.map((p) => /* @__PURE__ */ import_react.default.createElement("div", { key: p.id, style: styles.card, onClick: () => onSelect(p) }, /* @__PURE__ */ import_react.default.createElement(
+      "button",
+      {
+        onClick: (e) => {
+          e.stopPropagation();
+          onToggleFavorite(p.id);
+        },
+        style: styles.favoriteButton
+      },
+      /* @__PURE__ */ import_react.default.createElement(HeartIcon, { filled: favorites.has(p.id), size: 20 })
+    ), /* @__PURE__ */ import_react.default.createElement(
+      "img",
+      {
+        src: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${p.id}.png`,
+        alt: p.name,
+        style: styles.cardImage
+      }
+    ), /* @__PURE__ */ import_react.default.createElement("p", { style: styles.cardId }, "#", String(p.id).padStart(3, "0")), POKEMON_NAMES_ZH[p.name] && /* @__PURE__ */ import_react.default.createElement("p", { style: styles.cardNameZh }, POKEMON_NAMES_ZH[p.name]), /* @__PURE__ */ import_react.default.createElement("p", { style: styles.cardNameEn }, p.name.charAt(0).toUpperCase() + p.name.slice(1)), /* @__PURE__ */ import_react.default.createElement("div", { style: styles.cardTypes }, p.types.map((type, idx) => /* @__PURE__ */ import_react.default.createElement("span", { key: idx, style: { ...styles.cardTypeBadge, backgroundColor: TYPE_COLORS[type] || "#999" } }, TYPE_NAMES_ZH[type] || type)))))), pokemonList.length === 0 && /* @__PURE__ */ import_react.default.createElement("div", { style: styles.noResults }, /* @__PURE__ */ import_react.default.createElement("p", null, "\u{1F615} \u6CA1\u6709\u627E\u5230\u7B26\u5408\u6761\u4EF6\u7684\u5B9D\u53EF\u68A6")), totalPages > 1 && /* @__PURE__ */ import_react.default.createElement("div", { style: styles.pagination }, /* @__PURE__ */ import_react.default.createElement("button", { onClick: () => onPageChange(currentPage - 1), disabled: currentPage === 1, style: styles.pageButton }, "\u2190 \u4E0A\u4E00\u9875"), /* @__PURE__ */ import_react.default.createElement("span", { style: styles.pageInfo }, "\u7B2C ", currentPage, " / ", totalPages, " \u9875"), /* @__PURE__ */ import_react.default.createElement("button", { onClick: () => onPageChange(currentPage + 1), disabled: currentPage === totalPages, style: styles.pageButton }, "\u4E0B\u4E00\u9875 \u2192")));
+  }
+  var ListView_default = ListView;
+
+  // src/components/DetailView.jsx
+  var import_react4 = __toESM(require_react());
+
+  // src/components/StatsRadarChart.jsx
+  var import_react2 = __toESM(require_react());
+  function StatsRadarChart({ stats, color }) {
+    const canvasRef = (0, import_react2.useRef)(null);
+    (0, import_react2.useEffect)(() => {
+      if (!canvasRef.current || !stats || stats.length === 0) return;
+      const canvas = canvasRef.current;
+      const ctx = canvas.getContext("2d");
+      const width = canvas.width;
+      const height = canvas.height;
+      const centerX = width / 2;
+      const centerY = height / 2;
+      const maxRadius = Math.min(width, height) / 2 - 40;
+      const maxStat = 200;
+      ctx.clearRect(0, 0, width, height);
+      const statMap = {};
+      stats.forEach((s) => {
+        statMap[s.stat.name] = s.base_stat;
+      });
+      const orderedStats = STAT_ORDER.map((name) => ({
+        name,
+        value: statMap[name] || 0,
+        label: STAT_NAMES_ZH[name] || name
+      }));
+      function getHexagonPoints(cx, cy, radius) {
+        const points = [];
+        for (let i = 0; i < 6; i++) {
+          const angle = Math.PI / 2 * 3 + Math.PI / 3 * i;
+          points.push({
+            x: cx + radius * Math.cos(angle),
+            y: cy + radius * Math.sin(angle)
+          });
+        }
+        return points;
+      }
+      const gridLevels = [0.2, 0.4, 0.6, 0.8, 1];
+      gridLevels.forEach((level) => {
+        const radius = maxRadius * level;
+        const points = getHexagonPoints(centerX, centerY, radius);
+        ctx.beginPath();
+        ctx.moveTo(points[0].x, points[0].y);
+        for (let i = 1; i < points.length; i++) {
+          ctx.lineTo(points[i].x, points[i].y);
+        }
+        ctx.closePath();
+        ctx.strokeStyle = level === 1 ? "rgba(0, 0, 0, 0.3)" : "rgba(0, 0, 0, 0.1)";
+        ctx.lineWidth = level === 1 ? 1.5 : 0.5;
+        ctx.stroke();
+      });
+      const outerPoints = getHexagonPoints(centerX, centerY, maxRadius);
+      outerPoints.forEach((point) => {
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.lineTo(point.x, point.y);
+        ctx.strokeStyle = "rgba(0, 0, 0, 0.1)";
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      });
+      const dataPoints = orderedStats.map((stat, i) => {
+        const value = Math.min(stat.value, maxStat);
+        const radius = value / maxStat * maxRadius;
+        const angle = Math.PI / 2 * 3 + Math.PI / 3 * i;
+        return {
+          x: centerX + radius * Math.cos(angle),
+          y: centerY + radius * Math.sin(angle),
+          value: stat.value,
+          label: stat.label
+        };
+      });
+      ctx.beginPath();
+      ctx.moveTo(dataPoints[0].x, dataPoints[0].y);
+      for (let i = 1; i < dataPoints.length; i++) {
+        ctx.lineTo(dataPoints[i].x, dataPoints[i].y);
+      }
+      ctx.closePath();
+      ctx.fillStyle = color ? `${color}40` : "rgba(99, 102, 241, 0.3)";
+      ctx.fill();
+      ctx.strokeStyle = color || "#6366f1";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      dataPoints.forEach((point, i) => {
+        ctx.beginPath();
+        ctx.arc(point.x, point.y, 4, 0, Math.PI * 2);
+        ctx.fillStyle = color || "#6366f1";
+        ctx.fill();
+        ctx.strokeStyle = "#fff";
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+        ctx.font = "bold 11px -apple-system, sans-serif";
+        ctx.fillStyle = "#333";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        const outerPoint = outerPoints[i];
+        const offsetX = (outerPoint.x - centerX) * 0.15;
+        const offsetY = (outerPoint.y - centerY) * 0.15;
+        ctx.fillText(point.value.toString(), point.x + offsetX, point.y + offsetY - 8);
+      });
+      ctx.font = "bold 12px -apple-system, sans-serif";
+      ctx.fillStyle = "#555";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      orderedStats.forEach((stat, i) => {
+        const outerPoint = outerPoints[i];
+        const labelOffsetX = (outerPoint.x - centerX) * 0.25;
+        const labelOffsetY = (outerPoint.y - centerY) * 0.25;
+        ctx.fillText(stat.label, centerX + labelOffsetX * 2, centerY + labelOffsetY * 2);
+      });
+    }, [stats, color]);
+    return /* @__PURE__ */ import_react2.default.createElement(
+      "canvas",
+      {
+        ref: canvasRef,
+        width: 250,
+        height: 250,
+        style: { display: "block" }
+      }
+    );
+  }
+  var StatsRadarChart_default = StatsRadarChart;
+
+  // src/components/CompareView.jsx
+  var import_react3 = __toESM(require_react());
+  function CompareView({ compareList, onClose }) {
+    const [pokemonDetails, setPokemonDetails] = (0, import_react3.useState)([null, null]);
+    const [loading, setLoading] = (0, import_react3.useState)(true);
+    (0, import_react3.useEffect)(() => {
+      async function fetchDetails() {
+        if (compareList.length < 2) return;
+        setLoading(true);
+        try {
+          const details = await Promise.all([
+            axios_default.get(`${BASE_URL}/pokemon/${compareList[0].id}`),
+            axios_default.get(`${BASE_URL}/pokemon/${compareList[1].id}`)
+          ]);
+          setPokemonDetails([details[0].data, details[1].data]);
+        } catch (err) {
+          console.error("\u83B7\u53D6\u5BF9\u6BD4\u8BE6\u60C5\u5931\u8D25:", err);
+        } finally {
+          setLoading(false);
+        }
+      }
+      fetchDetails();
+    }, [compareList]);
+    if (loading || !pokemonDetails[0] || !pokemonDetails[1]) {
+      return /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.overlay }, /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.modal }, /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.loading }, /* @__PURE__ */ import_react3.default.createElement("div", { style: styles.spinner }), /* @__PURE__ */ import_react3.default.createElement("p", { style: { marginTop: 15, color: "#666" } }, "\u52A0\u8F7D\u5BF9\u6BD4\u6570\u636E..."))));
+    }
+    const pokemon1 = pokemonDetails[0];
+    const pokemon2 = pokemonDetails[1];
+    const types1 = pokemon1.types.map((t) => t.type.name);
+    const types2 = pokemon2.types.map((t) => t.type.name);
+    const statMap1 = {};
+    const statMap2 = {};
+    pokemon1.stats.forEach((s) => {
+      statMap1[s.stat.name] = s.base_stat;
+    });
+    pokemon2.stats.forEach((s) => {
+      statMap2[s.stat.name] = s.base_stat;
+    });
+    return /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.overlay }, /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.modal }, /* @__PURE__ */ import_react3.default.createElement("h2", { style: compareStyles.title }, "\u2694\uFE0F \u5B9D\u53EF\u68A6\u5BF9\u6BD4"), /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.compareContainer }, /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.pokemonSide }, /* @__PURE__ */ import_react3.default.createElement(
+      "img",
+      {
+        src: pokemon1.sprites.other["official-artwork"].front_default,
+        alt: pokemon1.name,
+        style: compareStyles.pokemonImage
+      }
+    ), /* @__PURE__ */ import_react3.default.createElement("h3", { style: compareStyles.pokemonName }, "#", String(pokemon1.id).padStart(3, "0"), " ", pokemon1.name.toUpperCase()), /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.typeBadges }, types1.map((type, idx) => /* @__PURE__ */ import_react3.default.createElement("span", { key: idx, style: { ...compareStyles.typeBadge, backgroundColor: TYPE_COLORS[type] } }, TYPE_NAMES_ZH[type]))), /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.infoRow }, /* @__PURE__ */ import_react3.default.createElement("span", null, "\u8EAB\u9AD8: ", (pokemon1.height / 10).toFixed(1), "m"), /* @__PURE__ */ import_react3.default.createElement("span", null, "\u4F53\u91CD: ", (pokemon1.weight / 10).toFixed(1), "kg"))), /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.vsContainer }, /* @__PURE__ */ import_react3.default.createElement("span", { style: compareStyles.vsText }, "VS")), /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.pokemonSide }, /* @__PURE__ */ import_react3.default.createElement(
+      "img",
+      {
+        src: pokemon2.sprites.other["official-artwork"].front_default,
+        alt: pokemon2.name,
+        style: compareStyles.pokemonImage
+      }
+    ), /* @__PURE__ */ import_react3.default.createElement("h3", { style: compareStyles.pokemonName }, "#", String(pokemon2.id).padStart(3, "0"), " ", pokemon2.name.toUpperCase()), /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.typeBadges }, types2.map((type, idx) => /* @__PURE__ */ import_react3.default.createElement("span", { key: idx, style: { ...compareStyles.typeBadge, backgroundColor: TYPE_COLORS[type] } }, TYPE_NAMES_ZH[type]))), /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.infoRow }, /* @__PURE__ */ import_react3.default.createElement("span", null, "\u8EAB\u9AD8: ", (pokemon2.height / 10).toFixed(1), "m"), /* @__PURE__ */ import_react3.default.createElement("span", null, "\u4F53\u91CD: ", (pokemon2.weight / 10).toFixed(1), "kg")))), /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.statsSection }, /* @__PURE__ */ import_react3.default.createElement("h4", { style: compareStyles.statsTitle }, "\u79CD\u65CF\u503C\u5BF9\u6BD4"), STAT_ORDER.map((statName) => {
+      const value1 = statMap1[statName] || 0;
+      const value2 = statMap2[statName] || 0;
+      const maxStat = 200;
+      const percentage1 = value1 / maxStat * 100;
+      const percentage2 = value2 / maxStat * 100;
+      const isWin1 = value1 > value2;
+      const isWin2 = value2 > value1;
+      const isTie = value1 === value2;
+      return /* @__PURE__ */ import_react3.default.createElement("div", { key: statName, style: compareStyles.statRow }, /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.statLabel }, /* @__PURE__ */ import_react3.default.createElement("span", { style: compareStyles.statValueLeft(isWin1) }, value1)), /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.statBarsContainer }, /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.statNameCenter }, STAT_NAMES_ZH[statName]), /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.statBarsRow }, /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.statBarWrapper }, /* @__PURE__ */ import_react3.default.createElement(
+        "div",
+        {
+          style: {
+            ...compareStyles.statBarLeft,
+            width: `${percentage1}%`,
+            backgroundColor: isWin1 ? "#22c55e" : isTie ? "#6b7280" : TYPE_COLORS[types1[0]]
+          }
+        }
+      )), /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.statBarWrapper }, /* @__PURE__ */ import_react3.default.createElement(
+        "div",
+        {
+          style: {
+            ...compareStyles.statBarRight,
+            width: `${percentage2}%`,
+            backgroundColor: isWin2 ? "#22c55e" : isTie ? "#6b7280" : TYPE_COLORS[types2[0]]
+          }
+        }
+      )))), /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.statLabel }, /* @__PURE__ */ import_react3.default.createElement("span", { style: compareStyles.statValueRight(isWin2) }, value2)));
+    })), /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.footer }, /* @__PURE__ */ import_react3.default.createElement("button", { onClick: onClose, style: compareStyles.closeButton }, "\u5173\u95ED"))));
+  }
+  var CompareView_default = CompareView;
+
+  // src/components/DetailView.jsx
+  async function fetchEvolutionChain(pokemonId) {
+    try {
+      let parseChainNode = function(node) {
+        if (!node) return;
+        const urlParts = node.species.url.split("/");
+        const id = parseInt(urlParts[urlParts.length - 2], 10);
+        chain.push({
+          name: node.species.name,
+          id
+        });
+        if (node.evolves_to && node.evolves_to.length > 0) {
+          node.evolves_to.forEach((evolution) => {
+            parseChainNode(evolution);
+          });
+        }
+      };
+      const speciesRes = await axios_default.get(`${BASE_URL}/pokemon-species/${pokemonId}`);
+      const evolutionChainUrl = speciesRes.data.evolution_chain.url;
+      const chainRes = await axios_default.get(evolutionChainUrl);
+      const chainData = chainRes.data.chain;
+      const chain = [];
+      parseChainNode(chainData);
+      return { chain };
+    } catch (error) {
+      console.error("\u83B7\u53D6\u8FDB\u5316\u94FE\u5931\u8D25:", error);
+      return { chain: [] };
+    }
+  }
+  function DetailView({ pokemon, onBack, loading, onSelect, compareList = [], onAddToCompare, onRemoveFromCompare, showCompare, onShowCompare }) {
+    const [evolutionChain, setEvolutionChain] = (0, import_react4.useState)(null);
+    const [loadingEvolution, setLoadingEvolution] = (0, import_react4.useState)(false);
+    const isInCompareList = compareList.some((p) => p.id === pokemon.id);
+    const isCompareListFull = compareList.length >= 2;
+    (0, import_react4.useEffect)(() => {
+      if (!pokemon) return;
+      async function loadEvolutionChain() {
+        setLoadingEvolution(true);
+        const result = await fetchEvolutionChain(pokemon.id);
+        setEvolutionChain(result);
+        setLoadingEvolution(false);
+      }
+      loadEvolutionChain();
+    }, [pokemon?.id]);
+    const handleEvolutionClick = (evo) => {
+      if (evo.id !== pokemon.id && onSelect) {
+        onSelect(evo);
+      }
+    };
+    if (loading) {
+      return /* @__PURE__ */ import_react4.default.createElement("div", { style: styles.center }, /* @__PURE__ */ import_react4.default.createElement("div", { style: styles.spinner }));
+    }
+    const types = pokemon.types.map((t) => t.type.name);
+    const mainType = types[0];
+    const filteredChain = evolutionChain?.chain?.filter((evo) => evo.id !== pokemon.id);
+    return /* @__PURE__ */ import_react4.default.createElement("div", { style: { ...styles.container, backgroundColor: TYPE_COLORS[mainType] + "20" } }, /* @__PURE__ */ import_react4.default.createElement("header", { style: styles.header }, /* @__PURE__ */ import_react4.default.createElement("div", { style: { display: "flex", alignItems: "center", gap: 10, marginBottom: 10 } }, /* @__PURE__ */ import_react4.default.createElement("button", { onClick: onBack, style: styles.backButton }, "\u2190 \u8FD4\u56DE"), /* @__PURE__ */ import_react4.default.createElement(
+      "button",
+      {
+        onClick: () => {
+          if (isInCompareList) {
+            onRemoveFromCompare && onRemoveFromCompare(pokemon.id);
+          } else {
+            onAddToCompare && onAddToCompare(pokemon);
+          }
+        },
+        disabled: !isInCompareList && isCompareListFull,
+        style: {
+          ...styles.compareButton,
+          backgroundColor: isInCompareList ? "#ef4444" : isCompareListFull ? "#9ca3af" : "#10b981",
+          cursor: isCompareListFull && !isInCompareList ? "not-allowed" : "pointer"
+        }
+      },
+      isInCompareList ? "\u79FB\u51FA\u5BF9\u6BD4" : "\u52A0\u5165\u5BF9\u6BD4",
+      " (",
+      compareList.length,
+      "/2)"
+    ), compareList.length === 2 && /* @__PURE__ */ import_react4.default.createElement(
+      "button",
+      {
+        onClick: () => onShowCompare && onShowCompare(true),
+        style: styles.viewCompareButton
+      },
+      "\u2696\uFE0F \u67E5\u770B\u5BF9\u6BD4"
+    )), /* @__PURE__ */ import_react4.default.createElement("h1", { style: styles.title }, "#", String(pokemon.id).padStart(3, "0"), " ", pokemon.name.toUpperCase())), /* @__PURE__ */ import_react4.default.createElement("div", { style: styles.detailContent }, /* @__PURE__ */ import_react4.default.createElement(
+      "img",
+      {
+        src: pokemon.sprites.other["official-artwork"].front_default,
+        alt: pokemon.name,
+        style: styles.detailImage
+      }
+    ), /* @__PURE__ */ import_react4.default.createElement("div", { style: styles.detailInfo }, /* @__PURE__ */ import_react4.default.createElement("div", { style: styles.typeBadges }, types.map((type, idx) => /* @__PURE__ */ import_react4.default.createElement("span", { key: idx, style: { ...styles.typeBadge, backgroundColor: TYPE_COLORS[type] } }, TYPE_NAMES_ZH[type]))), /* @__PURE__ */ import_react4.default.createElement("div", { style: styles.infoRow }, /* @__PURE__ */ import_react4.default.createElement("span", null, "\u8EAB\u9AD8: ", (pokemon.height / 10).toFixed(1), "m"), /* @__PURE__ */ import_react4.default.createElement("span", null, "\u4F53\u91CD: ", (pokemon.weight / 10).toFixed(1), "kg")), /* @__PURE__ */ import_react4.default.createElement("div", { style: styles.abilitiesSection }, /* @__PURE__ */ import_react4.default.createElement("h4", { style: styles.abilitiesTitle }, "\u7279\u6027\uFF1A"), /* @__PURE__ */ import_react4.default.createElement("div", { style: styles.abilitiesList }, pokemon.abilities?.map((abilityInfo, idx) => {
+      const abilityName = abilityInfo.ability.name.charAt(0).toUpperCase() + abilityInfo.ability.name.slice(1);
+      const isHidden = abilityInfo.is_hidden;
+      return /* @__PURE__ */ import_react4.default.createElement(
+        "span",
+        {
+          key: idx,
+          style: {
+            ...styles.abilityBadge,
+            backgroundColor: isHidden ? "#9ca3af" : "#6366f1"
+          }
+        },
+        abilityName,
+        isHidden && /* @__PURE__ */ import_react4.default.createElement("span", { style: styles.hiddenTag }, " (\u9690\u85CF)")
+      );
+    }))), /* @__PURE__ */ import_react4.default.createElement("div", { style: styles.statsSection }, /* @__PURE__ */ import_react4.default.createElement("h4", { style: styles.statsTitle }, "\u79CD\u65CF\u503C\uFF1A"), /* @__PURE__ */ import_react4.default.createElement("div", { style: styles.radarChartContainer }, /* @__PURE__ */ import_react4.default.createElement(StatsRadarChart_default, { stats: pokemon.stats, color: TYPE_COLORS[mainType] })), /* @__PURE__ */ import_react4.default.createElement("div", { style: styles.statsList }, pokemon.stats?.map((statInfo, idx) => {
+      const statName = STAT_NAMES_ZH[statInfo.stat.name] || statInfo.stat.name;
+      const percentage = Math.min(statInfo.base_stat / 200 * 100, 100);
+      return /* @__PURE__ */ import_react4.default.createElement("div", { key: idx, style: styles.statRow }, /* @__PURE__ */ import_react4.default.createElement("span", { style: styles.statName }, statName), /* @__PURE__ */ import_react4.default.createElement("div", { style: styles.statBarBg }, /* @__PURE__ */ import_react4.default.createElement(
+        "div",
+        {
+          style: {
+            ...styles.statBar,
+            width: `${percentage}%`,
+            backgroundColor: TYPE_COLORS[mainType] || "#6366f1"
+          }
+        }
+      )), /* @__PURE__ */ import_react4.default.createElement("span", { style: styles.statValue }, statInfo.base_stat));
+    }))))), loadingEvolution && /* @__PURE__ */ import_react4.default.createElement("div", { style: styles.evolutionSection }, /* @__PURE__ */ import_react4.default.createElement("p", { style: styles.evolutionLoading }, "\u52A0\u8F7D\u8FDB\u5316\u94FE...")), !loadingEvolution && evolutionChain?.chain?.length > 1 && /* @__PURE__ */ import_react4.default.createElement("div", { style: styles.evolutionSection }, /* @__PURE__ */ import_react4.default.createElement("h3", { style: styles.evolutionTitle }, "\u8FDB\u5316\u94FE\uFF1A"), /* @__PURE__ */ import_react4.default.createElement("div", { style: styles.evolutionChain }, evolutionChain.chain.map((evo, idx) => /* @__PURE__ */ import_react4.default.createElement(import_react4.default.Fragment, { key: evo.id }, /* @__PURE__ */ import_react4.default.createElement(
+      "div",
+      {
+        style: {
+          ...styles.evolutionItem,
+          cursor: evo.id !== pokemon.id ? "pointer" : "default",
+          opacity: evo.id === pokemon.id ? 1 : 0.7,
+          transform: evo.id === pokemon.id ? "scale(1.1)" : "scale(1)"
+        },
+        onClick: () => evo.id !== pokemon.id && handleEvolutionClick(evo)
+      },
+      /* @__PURE__ */ import_react4.default.createElement(
+        "img",
+        {
+          src: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${evo.id}.png`,
+          alt: evo.name,
+          style: styles.evolutionImage
+        }
+      ),
+      /* @__PURE__ */ import_react4.default.createElement("p", { style: styles.evolutionName }, evo.name.charAt(0).toUpperCase() + evo.name.slice(1)),
+      /* @__PURE__ */ import_react4.default.createElement("p", { style: styles.evolutionId }, "#", String(evo.id).padStart(3, "0"))
+    ), idx < evolutionChain.chain.length - 1 && /* @__PURE__ */ import_react4.default.createElement("span", { style: styles.evolutionArrow }, "\u2192"))))), showCompare && compareList && compareList.length === 2 && /* @__PURE__ */ import_react4.default.createElement(
+      CompareView_default,
+      {
+        compareList,
+        onClose: () => onShowCompare(false)
+      }
+    ));
+  }
+  var DetailView_default = DetailView;
+
+  // src/components/TypeChartModal.jsx
+  var import_react5 = __toESM(require_react());
+  function TypeChartModal({ show, attackType, onAttackTypeChange, onClose }) {
+    if (!show) return null;
+    const defenseTypes = Object.keys(TYPE_NAMES_ZH).filter((t) => t !== "all");
+    const getEffectiveness = (attack, defense) => {
+      const chart = TYPE_CHART[attack];
+      if (!chart) return 1;
+      return chart[defense] !== void 0 ? chart[defense] : 1;
+    };
+    const getEffectStyle = (effect) => {
+      if (effect === 2) return { backgroundColor: "#4ade80", color: "#166534" };
+      if (effect === 0.5) return { backgroundColor: "#f87171", color: "#7f1d1d" };
+      if (effect === 0) return { backgroundColor: "#9ca3af", color: "#374151" };
+      return { backgroundColor: "#ffffff", color: "#374151" };
+    };
+    const getEffectText = (effect) => {
+      if (effect === 2) return "2x \u6709\u6548";
+      if (effect === 0.5) return "0.5x \u51CF\u534A";
+      if (effect === 0) return "0x \u65E0\u6548";
+      return "1x \u6B63\u5E38";
+    };
+    return /* @__PURE__ */ import_react5.default.createElement("div", { style: modalStyles.overlay, onClick: onClose }, /* @__PURE__ */ import_react5.default.createElement("div", { style: modalStyles.modal, onClick: (e) => e.stopPropagation() }, /* @__PURE__ */ import_react5.default.createElement("div", { style: modalStyles.header }, /* @__PURE__ */ import_react5.default.createElement("h2", { style: modalStyles.title }, "\u{1F3AF} \u5C5E\u6027\u76F8\u514B\u8868"), /* @__PURE__ */ import_react5.default.createElement("button", { onClick: onClose, style: modalStyles.closeBtn }, "\u2715")), /* @__PURE__ */ import_react5.default.createElement("div", { style: modalStyles.content }, /* @__PURE__ */ import_react5.default.createElement("div", { style: modalStyles.selectRow }, /* @__PURE__ */ import_react5.default.createElement("label", { style: modalStyles.label }, "\u653B\u51FB\u5C5E\u6027\uFF1A"), /* @__PURE__ */ import_react5.default.createElement(
+      "select",
+      {
+        value: attackType,
+        onChange: (e) => onAttackTypeChange(e.target.value),
+        style: modalStyles.select
+      },
+      defenseTypes.map((type) => /* @__PURE__ */ import_react5.default.createElement("option", { key: type, value: type }, TYPE_NAMES_ZH[type]))
+    )), /* @__PURE__ */ import_react5.default.createElement("div", { style: modalStyles.tableWrapper }, /* @__PURE__ */ import_react5.default.createElement("table", { style: modalStyles.table }, /* @__PURE__ */ import_react5.default.createElement("thead", null, /* @__PURE__ */ import_react5.default.createElement("tr", null, /* @__PURE__ */ import_react5.default.createElement("th", { style: modalStyles.th }, "\u9632\u5FA1\u5C5E\u6027"), /* @__PURE__ */ import_react5.default.createElement("th", { style: modalStyles.th }, "\u6548\u679C"))), /* @__PURE__ */ import_react5.default.createElement("tbody", null, defenseTypes.map((defense) => {
+      const effect = getEffectiveness(attackType, defense);
+      return /* @__PURE__ */ import_react5.default.createElement("tr", { key: defense }, /* @__PURE__ */ import_react5.default.createElement("td", { style: modalStyles.td }, /* @__PURE__ */ import_react5.default.createElement("span", { style: {
+        ...modalStyles.typeBadge,
+        backgroundColor: TYPE_COLORS[defense] || "#999"
+      } }, TYPE_NAMES_ZH[defense])), /* @__PURE__ */ import_react5.default.createElement("td", { style: { ...modalStyles.td, ...modalStyles.effectCell } }, /* @__PURE__ */ import_react5.default.createElement("span", { style: { ...modalStyles.effectBadge, ...getEffectStyle(effect) } }, getEffectText(effect))));
+    })))))));
+  }
+  var TypeChartModal_default = TypeChartModal;
+
+  // src/App.jsx
+  function loadFavorites() {
+    try {
+      const stored = localStorage.getItem("pokemonFavorites");
+      return stored ? new Set(JSON.parse(stored)) : /* @__PURE__ */ new Set();
+    } catch {
+      return /* @__PURE__ */ new Set();
+    }
+  }
+  function saveFavorites(favorites) {
+    try {
+      localStorage.setItem("pokemonFavorites", JSON.stringify(Array.from(favorites)));
+    } catch {
+    }
+  }
+  function App() {
+    const [pokemonList, setPokemonList] = (0, import_react6.useState)([]);
+    const [searchQuery, setSearchQuery] = (0, import_react6.useState)("");
+    const [selectedType, setSelectedType] = (0, import_react6.useState)("all");
+    const [selectedGen, setSelectedGen] = (0, import_react6.useState)(0);
+    const [showFavoritesOnly, setShowFavoritesOnly] = (0, import_react6.useState)(false);
+    const [favorites, setFavorites] = (0, import_react6.useState)(() => loadFavorites());
+    const [selectedPokemon, setSelectedPokemon] = (0, import_react6.useState)(null);
+    const [loading, setLoading] = (0, import_react6.useState)(true);
+    const [error, setError] = (0, import_react6.useState)(null);
+    const [currentPage, setCurrentPage] = (0, import_react6.useState)(1);
+    const [totalCount, setTotalCount] = (0, import_react6.useState)(0);
+    const [showTypeChart, setShowTypeChart] = (0, import_react6.useState)(false);
+    const [selectedAttackType, setSelectedAttackType] = (0, import_react6.useState)("normal");
+    const [compareList, setCompareList] = (0, import_react6.useState)([]);
+    const [showCompare, setShowCompare] = (0, import_react6.useState)(false);
+    (0, import_react6.useEffect)(() => {
+      async function fetchPokemonCount() {
+        try {
+          const response = await axios_default.get(`${BASE_URL}/pokemon?limit=1`);
+          setTotalCount(response.data.count);
+        } catch (err) {
+          console.error("\u83B7\u53D6\u603B\u6570\u5931\u8D25:", err);
+          setTotalCount(1025);
+        }
+      }
+      fetchPokemonCount();
+    }, []);
+    (0, import_react6.useEffect)(() => {
+      async function fetchPokemon() {
+        try {
+          setLoading(true);
+          const limit = totalCount > 0 ? totalCount : 1025;
+          const response = await axios_default.get(`${BASE_URL}/pokemon?limit=${limit}`);
+          const pokemonDetails = await Promise.all(
+            response.data.results.map(async (p, idx) => {
+              const detailRes = await axios_default.get(p.url);
+              return {
+                name: p.name,
+                id: idx + 1,
+                types: detailRes.data.types.map((t) => t.type.name)
+              };
+            })
+          );
+          setPokemonList(pokemonDetails);
+          setError(null);
+        } catch (err) {
+          setError("\u52A0\u8F7D\u5931\u8D25\uFF1A" + err.message);
+        } finally {
+          setLoading(false);
+        }
+      }
+      if (totalCount > 0 || totalCount === 0) {
+        fetchPokemon();
+      }
+    }, [totalCount]);
+    const filteredList = (0, import_react6.useMemo)(() => {
+      let filtered = [...pokemonList];
+      if (selectedGen > 0) {
+        const gen = GENERATIONS.find((g) => g.gen === selectedGen);
+        if (gen) {
+          filtered = filtered.filter((p) => p.id >= gen.start && p.id <= gen.end);
+        }
+      }
+      if (showFavoritesOnly) {
+        filtered = filtered.filter((p) => favorites.has(p.id));
+      }
+      if (selectedType && selectedType !== "all") {
+        filtered = filtered.filter((p) => p.types.includes(selectedType));
+      }
+      if (searchQuery && searchQuery.trim()) {
+        const lowerQuery = searchQuery.toLowerCase().trim();
+        filtered = filtered.filter((p) => {
+          const nameMatch = p.name.toLowerCase().includes(lowerQuery);
+          const idMatch = p.id.toString() === lowerQuery;
+          return nameMatch || idMatch;
+        });
+      }
+      return filtered;
+    }, [pokemonList, selectedGen, showFavoritesOnly, selectedType, searchQuery, favorites]);
+    const paginatedList = (0, import_react6.useMemo)(() => {
+      const start = (currentPage - 1) * ITEMS_PER_PAGE;
+      return filteredList.slice(start, start + ITEMS_PER_PAGE);
+    }, [filteredList, currentPage]);
+    const totalPages = Math.ceil(filteredList.length / ITEMS_PER_PAGE);
+    (0, import_react6.useEffect)(() => {
+      setCurrentPage(1);
+    }, [selectedGen, selectedType, searchQuery, showFavoritesOnly]);
+    async function selectPokemon(pokemon) {
+      try {
+        setLoading(true);
+        const response = await axios_default.get(`${BASE_URL}/pokemon/${pokemon.id}`);
+        setSelectedPokemon(response.data);
+        setError(null);
+      } catch (err) {
+        setError("\u52A0\u8F7D\u8BE6\u60C5\u5931\u8D25\uFF1A" + err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+    function goBack() {
+      setSelectedPokemon(null);
+    }
+    function toggleFavorite(pokemonId) {
+      const newFavorites = new Set(favorites);
+      if (newFavorites.has(pokemonId)) {
+        newFavorites.delete(pokemonId);
+      } else {
+        newFavorites.add(pokemonId);
+      }
+      setFavorites(newFavorites);
+      saveFavorites(newFavorites);
+    }
+    function handleSearch(query) {
+      setSearchQuery(query);
+    }
+    function handleTypeChange(type) {
+      setSelectedType(type);
+    }
+    function handleGenChange(gen) {
+      setSelectedGen(parseInt(gen));
+    }
+    function handleFavoritesToggle(showOnly) {
+      setShowFavoritesOnly(showOnly);
+    }
+    function handlePageChange(page) {
+      setCurrentPage(page);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+    function addToCompare(pokemon) {
+      if (compareList.length >= 2) return;
+      if (compareList.some((p) => p.id === pokemon.id)) return;
+      setCompareList([...compareList, pokemon]);
+    }
+    function removeFromCompare(pokemonId) {
+      setCompareList(compareList.filter((p) => p.id !== pokemonId));
+    }
+    function clearCompare() {
+      setCompareList([]);
+    }
+    if (loading && !selectedPokemon && pokemonList.length === 0) {
+      return /* @__PURE__ */ import_react6.default.createElement("div", { style: styles.center }, /* @__PURE__ */ import_react6.default.createElement("div", { style: styles.spinner }), /* @__PURE__ */ import_react6.default.createElement("p", { style: { marginTop: 20, color: "#666" } }, "\u52A0\u8F7D\u4E2D... \u6B63\u5728\u83B7\u53D6 ", totalCount || 1025, " \u53EA\u5B9D\u53EF\u68A6"));
+    }
+    if (error && !selectedPokemon) {
+      return /* @__PURE__ */ import_react6.default.createElement("div", { style: styles.center }, /* @__PURE__ */ import_react6.default.createElement("p", { style: { color: "#FF5252", fontSize: 18 } }, "\u274C ", error));
+    }
+    if (selectedPokemon) {
+      return /* @__PURE__ */ import_react6.default.createElement(
+        DetailView_default,
+        {
+          pokemon: selectedPokemon,
+          onBack: goBack,
+          loading,
+          onSelect: selectPokemon,
+          compareList,
+          onAddToCompare: addToCompare,
+          onRemoveFromCompare: removeFromCompare,
+          showCompare,
+          onShowCompare: setShowCompare
+        }
+      );
+    }
+    return /* @__PURE__ */ import_react6.default.createElement(import_react6.default.Fragment, null, /* @__PURE__ */ import_react6.default.createElement(
+      ListView_default,
+      {
+        pokemonList: paginatedList,
+        searchQuery,
+        selectedType,
+        selectedGen,
+        onSearch: handleSearch,
+        onTypeChange: handleTypeChange,
+        onGenChange: handleGenChange,
+        onSelect: selectPokemon,
+        favorites,
+        onToggleFavorite: toggleFavorite,
+        showFavoritesOnly,
+        onFavoritesToggle: handleFavoritesToggle,
+        totalCount: filteredList.length,
+        currentPage,
+        totalPages,
+        onPageChange: handlePageChange,
+        showTypeChart,
+        onShowTypeChart: setShowTypeChart,
+        attackType: selectedAttackType,
+        onAttackTypeChange: setSelectedAttackType,
+        compareList,
+        onShowCompare: setShowCompare
+      }
+    ), /* @__PURE__ */ import_react6.default.createElement(
+      TypeChartModal_default,
+      {
+        show: showTypeChart,
+        attackType: selectedAttackType,
+        onAttackTypeChange: setSelectedAttackType,
+        onClose: () => setShowTypeChart(false)
+      }
+    ), showCompare && compareList.length === 2 && /* @__PURE__ */ import_react6.default.createElement(
+      CompareView_default,
+      {
+        compareList,
+        onClose: () => setShowCompare(false)
+      }
+    ));
+  }
+  var App_default = App;
+
+  // renderer.js
   var root = (0, import_client.createRoot)(document.getElementById("root"));
-  root.render(/* @__PURE__ */ import_react.default.createElement(App, null));
+  root.render(/* @__PURE__ */ import_react7.default.createElement(App_default, null));
 })();
 /*! Bundled license information:
 
