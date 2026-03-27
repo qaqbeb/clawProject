@@ -1,0 +1,4 @@
+node_modules/
+.DS_Store
+*.log
+renderer.js.backup
