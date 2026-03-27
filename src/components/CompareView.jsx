@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { BASE_URL, TYPE_COLORS, TYPE_NAMES_ZH, STAT_NAMES_ZH, STAT_ORDER } from '../data/constants';
+import { BASE_URL, TYPE_COLORS, TYPE_NAMES_ZH, STAT_NAMES_ZH, STAT_ORDER, POKEMON_NAMES_ZH } from '../data/constants';
 import { styles, compareStyles } from '../styles/index';
 
 // 对比视图组件
@@ -67,8 +67,13 @@ function CompareView({ compareList, onClose }) {
               style={compareStyles.pokemonImage}
             />
             <h3 style={compareStyles.pokemonName}>
-              #{String(pokemon1.id).padStart(3, '0')} {pokemon1.name.toUpperCase()}
+              #{String(pokemon1.id).padStart(3, '0')} {pokemon1.name.charAt(0).toUpperCase() + pokemon1.name.slice(1)}
             </h3>
+            {POKEMON_NAMES_ZH[pokemon1.name] && (
+              <p style={{ fontSize: 14, color: '#666', marginTop: -8, marginBottom: 8 }}>
+                {POKEMON_NAMES_ZH[pokemon1.name]}
+              </p>
+            )}
             <div style={compareStyles.typeBadges}>
               {types1.map((type, idx) => (
                 <span key={idx} style={{ ...compareStyles.typeBadge, backgroundColor: TYPE_COLORS[type] }}>
@@ -95,8 +100,13 @@ function CompareView({ compareList, onClose }) {
               style={compareStyles.pokemonImage}
             />
             <h3 style={compareStyles.pokemonName}>
-              #{String(pokemon2.id).padStart(3, '0')} {pokemon2.name.toUpperCase()}
+              #{String(pokemon2.id).padStart(3, '0')} {pokemon2.name.charAt(0).toUpperCase() + pokemon2.name.slice(1)}
             </h3>
+            {POKEMON_NAMES_ZH[pokemon2.name] && (
+              <p style={{ fontSize: 14, color: '#666', marginTop: -8, marginBottom: 8 }}>
+                {POKEMON_NAMES_ZH[pokemon2.name]}
+              </p>
+            )}
             <div style={compareStyles.typeBadges}>
               {types2.map((type, idx) => (
                 <span key={idx} style={{ ...compareStyles.typeBadge, backgroundColor: TYPE_COLORS[type] }}>

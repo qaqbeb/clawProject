@@ -26575,6 +26575,149 @@ var App = (() => {
   };
   var STAT_ORDER = ["hp", "attack", "defense", "special-attack", "special-defense", "speed"];
   var ITEMS_PER_PAGE = 50;
+  var ABILITIES_ZH = {
+    // 御三家特性
+    overgrow: { name: "\u8302\u76DB", desc: "HP\u51CF\u5C11\u65F6\uFF0C\u8349\u5C5E\u6027\u62DB\u5F0F\u5A01\u529B\u63D0\u5347" },
+    blaze: { name: "\u731B\u706B", desc: "HP\u51CF\u5C11\u65F6\uFF0C\u706B\u5C5E\u6027\u62DB\u5F0F\u5A01\u529B\u63D0\u5347" },
+    torrent: { name: "\u6FC0\u6D41", desc: "HP\u51CF\u5C11\u65F6\uFF0C\u6C34\u5C5E\u6027\u62DB\u5F0F\u5A01\u529B\u63D0\u5347" },
+    // 天气相关特性
+    chlorophyll: { name: "\u53F6\u7EFF\u7D20", desc: "\u6674\u6717\u5929\u6C14\u65F6\uFF0C\u901F\u5EA6\u63D0\u5347" },
+    swift_swim: { name: "\u60A0\u6E38\u81EA\u5982", desc: "\u96E8\u5929\u65F6\u901F\u5EA6\u63D0\u5347" },
+    rain_dish: { name: "\u96E8\u76D8", desc: "\u96E8\u5929\u65F6\u56DE\u590DHP" },
+    drought: { name: "\u65E5\u7167", desc: "\u51FA\u573A\u65F6\u53D8\u4E3A\u6674\u6717\u5929\u6C14" },
+    drizzle: { name: "\u964D\u96E8", desc: "\u51FA\u573A\u65F6\u53D8\u4E3A\u96E8\u5929" },
+    sand_veil: { name: "\u6C99\u9690", desc: "\u6C99\u66B4\u65F6\uFF0C\u56DE\u907F\u7387\u63D0\u9AD8" },
+    sand_stream: { name: "\u626C\u6C99", desc: "\u51FA\u573A\u65F6\u53D8\u4E3A\u6C99\u66B4\u5929\u6C14" },
+    snow_cloak: { name: "\u96EA\u9690", desc: "\u51B0\u96F9\u65F6\uFF0C\u56DE\u907F\u7387\u63D0\u9AD8" },
+    snow_warning: { name: "\u964D\u96EA", desc: "\u51FA\u573A\u65F6\u53D8\u4E3A\u51B0\u96F9\u5929\u6C14" },
+    // 免疫/吸收类特性
+    water_absorb: { name: "\u50A8\u6C34", desc: "\u6C34\u5C5E\u6027\u62DB\u5F0F\u56DE\u590DHP" },
+    volt_absorb: { name: "\u84C4\u7535", desc: "\u7535\u5C5E\u6027\u62DB\u5F0F\u56DE\u590DHP" },
+    flash_fire: { name: "\u5F15\u706B", desc: "\u53D7\u706B\u5C5E\u6027\u62DB\u5F0F\u653B\u51FB\u65F6\u63D0\u5347\u706B\u5C5E\u6027\u62DB\u5F0F\u5A01\u529B" },
+    lightning_rod: { name: "\u907F\u96F7\u9488", desc: "\u5C06\u7535\u5C5E\u6027\u62DB\u5F0F\u5F15\u5411\u81EA\u5DF1\uFF0C\u63D0\u5347\u7279\u653B" },
+    storm_drain: { name: "\u5F15\u6C34", desc: "\u5C06\u6C34\u5C5E\u6027\u62DB\u5F0F\u5F15\u5411\u81EA\u5DF1\uFF0C\u63D0\u5347\u7279\u653B" },
+    motor_drive: { name: "\u7535\u6C14\u5F15\u64CE", desc: "\u53D7\u7535\u5C5E\u6027\u62DB\u5F0F\u653B\u51FB\u65F6\u63D0\u5347\u901F\u5EA6" },
+    sap_sipper: { name: "\u98DF\u8349", desc: "\u53D7\u8349\u5C5E\u6027\u62DB\u5F0F\u653B\u51FB\u65F6\u63D0\u5347\u653B\u51FB" },
+    earth_eater: { name: "\u98DF\u571F", desc: "\u53D7\u5730\u9762\u5C5E\u6027\u62DB\u5F0F\u653B\u51FB\u65F6\u56DE\u590DHP" },
+    wind_rider: { name: "\u4E58\u98CE", desc: "\u53D7\u98CE\u62DB\u5F0F\u653B\u51FB\u65F6\u63D0\u5347\u653B\u51FB" },
+    well_baked_body: { name: "\u7126\u9999\u4E4B\u8EAF", desc: "\u53D7\u706B\u5C5E\u6027\u62DB\u5F0F\u653B\u51FB\u65F6\u5927\u5E45\u63D0\u5347\u9632\u5FA1" },
+    thermal_exchange: { name: "\u70ED\u4EA4\u6362", desc: "\u53D7\u706B\u5C5E\u6027\u62DB\u5F0F\u653B\u51FB\u65F6\u63D0\u5347\u653B\u51FB" },
+    // 接触惩罚特性
+    static: { name: "\u9759\u7535", desc: "\u63A5\u89E6\u65F6\u53EF\u80FD\u8BA9\u5BF9\u624B\u9EBB\u75F9" },
+    poison_point: { name: "\u6BD2\u523A", desc: "\u63A5\u89E6\u65F6\u53EF\u80FD\u8BA9\u5BF9\u624B\u4E2D\u6BD2" },
+    flame_body: { name: "\u706B\u7130\u4E4B\u8EAF", desc: "\u63A5\u89E6\u65F6\u53EF\u80FD\u8BA9\u5BF9\u624B\u707C\u4F24" },
+    cute_charm: { name: "\u8FF7\u4EBA\u4E4B\u8EAF", desc: "\u63A5\u89E6\u65F6\u53EF\u80FD\u8BA9\u5BF9\u624B\u7740\u8FF7" },
+    effect_spore: { name: "\u5B62\u5B50", desc: "\u63A5\u89E6\u65F6\u53EF\u80FD\u8BA9\u5BF9\u624B\u9EBB\u75F9\u3001\u4E2D\u6BD2\u6216\u7761\u7720" },
+    rough_skin: { name: "\u7C97\u7CD9\u76AE\u80A4", desc: "\u63A5\u89E6\u65F6\u8BA9\u5BF9\u624B\u53D7\u5230\u4F24\u5BB3" },
+    iron_barbs: { name: "\u94C1\u523A", desc: "\u63A5\u89E6\u65F6\u8BA9\u5BF9\u624B\u53D7\u5230\u4F24\u5BB3" },
+    gooey: { name: "\u9ECF\u6ED1", desc: "\u63A5\u89E6\u65F6\u964D\u4F4E\u5BF9\u624B\u901F\u5EA6" },
+    tangling_hair: { name: "\u5377\u53D1", desc: "\u63A5\u89E6\u65F6\u964D\u4F4E\u5BF9\u624B\u901F\u5EA6" },
+    stamina: { name: "\u6BC5\u529B", desc: "\u53D7\u653B\u51FB\u65F6\u63D0\u5347\u9632\u5FA1" },
+    berserk: { name: "\u6012\u6C14\u51B2\u51B2", desc: "HP\u51CF\u5C11\u65F6\u63D0\u5347\u7279\u653B" },
+    anger_point: { name: "\u6012\u706B\u51B2\u5929", desc: "\u88AB\u51FB\u4E2D\u8981\u5BB3\u65F6\u653B\u51FB\u5927\u5E45\u63D0\u5347" },
+    // 免疫类特性
+    levitate: { name: "\u6F02\u6D6E", desc: "\u514D\u75AB\u5730\u9762\u5C5E\u6027\u62DB\u5F0F" },
+    immunity: { name: "\u514D\u75AB", desc: "\u4E0D\u4F1A\u4E2D\u6BD2" },
+    limber: { name: "\u67D4\u8F6F", desc: "\u4E0D\u4F1A\u9EBB\u75F9" },
+    insomnia: { name: "\u4E0D\u7720", desc: "\u4E0D\u4F1A\u7761\u7720" },
+    vital_spirit: { name: "\u5E72\u52B2", desc: "\u4E0D\u4F1A\u7761\u7720" },
+    water_veil: { name: "\u6C34\u4E4B\u63A9\u62A4", desc: "\u4E0D\u4F1A\u707C\u4F24" },
+    magma_armor: { name: "\u7194\u5CA9\u94E0\u7532", desc: "\u4E0D\u4F1A\u51B0\u51BB" },
+    oblivious: { name: "\u8FDF\u949D", desc: "\u4E0D\u4F1A\u7740\u8FF7\u548C\u6311\u8845" },
+    own_tempo: { name: "\u6211\u884C\u6211\u7D20", desc: "\u4E0D\u4F1A\u6DF7\u4E71" },
+    inner_focus: { name: "\u7CBE\u795E\u529B", desc: "\u4E0D\u4F1A\u754F\u7F29" },
+    shield_dust: { name: "\u9CDE\u7C89", desc: "\u4E0D\u53D7\u62DB\u5F0F\u8FFD\u52A0\u6548\u679C\u5F71\u54CD" },
+    bulletproof: { name: "\u9632\u5F39", desc: "\u514D\u75AB\u7403\u548C\u5F39\u7C7B\u62DB\u5F0F" },
+    soundproof: { name: "\u9694\u97F3", desc: "\u514D\u75AB\u58F0\u97F3\u7C7B\u62DB\u5F0F" },
+    sucker_punch: { name: "\u7A81\u88AD", desc: "\u5148\u5236\u653B\u51FB\u62DB\u5F0F\u5A01\u529B\u63D0\u5347" },
+    // 能力变化特性
+    intimidate: { name: "\u5A01\u5413", desc: "\u51FA\u573A\u65F6\u964D\u4F4E\u5BF9\u624B\u653B\u51FB" },
+    dauntless_shield: { name: "\u4E0D\u5C48\u4E4B\u76FE", desc: "\u51FA\u573A\u65F6\u63D0\u5347\u9632\u5FA1" },
+    download: { name: "\u4E0B\u8F7D", desc: "\u51FA\u573A\u65F6\u6839\u636E\u5BF9\u624B\u9632\u5FA1\u63D0\u5347\u653B\u51FB\u6216\u7279\u653B" },
+    trace: { name: "\u8FFD\u8E2A", desc: "\u590D\u5236\u5BF9\u624B\u7684\u7279\u6027" },
+    huge_power: { name: "\u5927\u529B\u58EB", desc: "\u7269\u7406\u653B\u51FB\u5A01\u529B\u7FFB\u500D" },
+    pure_power: { name: "\u745C\u4F3D\u4E4B\u529B", desc: "\u7269\u7406\u653B\u51FB\u5A01\u529B\u7FFB\u500D" },
+    sheer_force: { name: "\u5F3A\u884C", desc: "\u8FFD\u52A0\u6548\u679C\u6D88\u5931\u4F46\u5A01\u529B\u63D0\u5347" },
+    technician: { name: "\u6280\u672F\u9AD8\u624B", desc: "\u5A01\u529B60\u4EE5\u4E0B\u7684\u62DB\u5F0F\u5A01\u529B\u63D0\u5347" },
+    adaptability: { name: "\u9002\u5E94\u529B", desc: "\u672C\u7CFB\u62DB\u5F0F\u5A01\u529B\u66F4\u9AD8" },
+    analytic: { name: "\u5206\u6790", desc: "\u6700\u540E\u51FA\u624B\u65F6\u5A01\u529B\u63D0\u5347" },
+    sniper: { name: "\u72D9\u51FB\u624B", desc: "\u51FB\u4E2D\u8981\u5BB3\u65F6\u4F24\u5BB3\u66F4\u9AD8" },
+    strong_jaw: { name: "\u5F3A\u58EE\u4E4B\u989A", desc: "\u54AC\u7C7B\u62DB\u5F0F\u5A01\u529B\u63D0\u5347" },
+    mega_launcher: { name: "\u8D85\u7EA7\u53D1\u5C04\u5668", desc: "\u6CE2\u52A8\u7C7B\u62DB\u5F0F\u5A01\u529B\u63D0\u5347" },
+    iron_fist: { name: "\u94C1\u62F3", desc: "\u62F3\u51FB\u7C7B\u62DB\u5F0F\u5A01\u529B\u63D0\u5347" },
+    skill_link: { name: "\u8FDE\u7EED\u653B\u51FB", desc: "\u8FDE\u7EED\u62DB\u5F0F\u5FC5\u5B9A\u6253\u6EE1" },
+    hustle: { name: "\u6D3B\u529B", desc: "\u653B\u51FB\u63D0\u5347\u4F46\u547D\u4E2D\u7387\u964D\u4F4E" },
+    guts: { name: "\u6BC5\u529B", desc: "\u5F02\u5E38\u72B6\u6001\u65F6\u653B\u51FB\u63D0\u5347" },
+    marvel_scale: { name: "\u5947\u8FF9\u76AE\u80A4", desc: "\u5F02\u5E38\u72B6\u6001\u65F6\u9632\u5FA1\u63D0\u5347" },
+    quick_feet: { name: "\u98DE\u6BDB\u817F", desc: "\u5F02\u5E38\u72B6\u6001\u65F6\u901F\u5EA6\u63D0\u5347" },
+    toxic_boost: { name: "\u6BD2\u66B4\u8D70", desc: "\u4E2D\u6BD2\u65F6\u653B\u51FB\u63D0\u5347" },
+    flare_boost: { name: "\u70ED\u66B4\u8D70", desc: "\u707C\u4F24\u65F6\u7279\u653B\u63D0\u5347" },
+    // 场地相关特性
+    grass_pelt: { name: "\u8349\u4E4B\u6BDB\u76AE", desc: "\u8349\u573A\u65F6\u9632\u5FA1\u63D0\u5347" },
+    surge_surfer: { name: "\u51B2\u6D6A\u4E4B\u5C3E", desc: "\u7535\u6C14\u573A\u5730\u65F6\u901F\u5EA6\u63D0\u5347" },
+    // 辅助特性
+    synchronize: { name: "\u540C\u6B65", desc: "\u5C06\u5F02\u5E38\u72B6\u6001\u4F20\u9012\u7ED9\u5BF9\u624B" },
+    natural_cure: { name: "\u81EA\u7136\u56DE\u590D", desc: "\u9000\u573A\u65F6\u6CBB\u6108\u5F02\u5E38\u72B6\u6001" },
+    hydration: { name: "\u6E7F\u6DA6\u4E4B\u8EAF", desc: "\u96E8\u5929\u65F6\u6CBB\u6108\u5F02\u5E38\u72B6\u6001" },
+    shed_skin: { name: "\u8715\u76AE", desc: "\u6709\u53EF\u80FD\u6CBB\u6108\u5F02\u5E38\u72B6\u6001" },
+    magic_guard: { name: "\u9B54\u6CD5\u5B88\u62A4", desc: "\u4E0D\u53D7\u9664\u4E86\u76F4\u63A5\u653B\u51FB\u4EE5\u5916\u7684\u4F24\u5BB3" },
+    magic_bounce: { name: "\u9B54\u6CD5\u955C", desc: "\u53CD\u5F39\u53D8\u5316\u62DB\u5F0F" },
+    sticky_hold: { name: "\u9ECF\u7740", desc: "\u9053\u5177\u4E0D\u4F1A\u88AB\u62A2\u8D70" },
+    pickpocket: { name: "\u987A\u624B\u7275\u7F8A", desc: "\u63A5\u89E6\u65F6\u62A2\u593A\u5BF9\u624B\u9053\u5177" },
+    frisk: { name: "\u770B\u7A7F", desc: "\u51FA\u573A\u65F6\u67E5\u770B\u5BF9\u624B\u9053\u5177" },
+    item_master: { name: "\u9053\u5177\u5927\u5E08", desc: "\u65E0\u89C6\u9053\u5177\u4F7F\u7528\u9650\u5236" },
+    klutz: { name: "\u7B28\u624B\u7B28\u811A", desc: "\u65E0\u6CD5\u4F7F\u7528\u9053\u5177" },
+    runaway: { name: "\u9003\u8DD1", desc: "\u4E00\u5B9A\u80FD\u4ECE\u91CE\u751F\u5B9D\u53EF\u68A6\u90A3\u91CC\u9003\u8D70" },
+    keen_eye: { name: "\u9510\u5229\u76EE\u5149", desc: "\u547D\u4E2D\u7387\u4E0D\u4F1A\u88AB\u964D\u4F4E" },
+    tangled_feet: { name: "\u8E52\u8DDA", desc: "\u6DF7\u4E71\u65F6\uFF0C\u56DE\u907F\u7387\u63D0\u9AD8" },
+    rivalry: { name: "\u7ADE\u4E89\u5FC3", desc: "\u5BF9\u624B\u6027\u522B\u76F8\u540C\u65F6\uFF0C\u653B\u51FB\u63D0\u5347" },
+    stench: { name: "\u6076\u81ED", desc: "\u53EF\u80FD\u8BA9\u5BF9\u624B\u754F\u7F29" },
+    speed_boost: { name: "\u52A0\u901F", desc: "\u6BCF\u56DE\u5408\u901F\u5EA6\u63D0\u5347" },
+    moody: { name: "\u5FC3\u60C5\u4E0D\u5B9A", desc: "\u6BCF\u56DE\u5408\u80FD\u529B\u968F\u673A\u53D8\u5316" },
+    cursed_body: { name: "\u8BC5\u5492\u4E4B\u8EAF", desc: "\u63A5\u89E6\u65F6\u53EF\u80FD\u5C01\u5370\u5BF9\u624B\u62DB\u5F0F" },
+    weak_armor: { name: "\u788E\u88C2\u94E0\u7532", desc: "\u53D7\u7269\u7406\u653B\u51FB\u65F6\u901F\u5EA6\u63D0\u5347\u9632\u5FA1\u964D\u4F4E" },
+    battle_armor: { name: "\u6218\u6597\u76D4\u7532", desc: "\u4E0D\u4F1A\u88AB\u51FB\u4E2D\u8981\u5BB3" },
+    shell_armor: { name: "\u786C\u58F3\u76D4\u7532", desc: "\u4E0D\u4F1A\u88AB\u51FB\u4E2D\u8981\u5BB3" },
+    clear_body: { name: "\u6D01\u7656", desc: "\u80FD\u529B\u4E0D\u4F1A\u88AB\u964D\u4F4E" },
+    white_smoke: { name: "\u767D\u8272\u70DF\u96FE", desc: "\u80FD\u529B\u4E0D\u4F1A\u88AB\u964D\u4F4E" },
+    hyper_cutter: { name: "\u602A\u529B\u94B3", desc: "\u653B\u51FB\u4E0D\u4F1A\u88AB\u964D\u4F4E" },
+    // 状态变化特性
+    poison_heal: { name: "\u6BD2\u7597", desc: "\u4E2D\u6BD2\u65F6\u56DE\u590DHP" },
+    // 道具相关特性
+    pickup: { name: "\u6361\u62FE", desc: "\u6218\u6597\u540E\u53EF\u80FD\u6361\u5230\u9053\u5177" },
+    harvest: { name: "\u6536\u83B7", desc: "\u53EF\u80FD\u56DE\u6536\u7528\u8FC7\u7684\u6811\u679C" },
+    gluttony: { name: "\u8D2A\u5403\u9B3C", desc: "HP\u4F4E\u65F6\u63D0\u524D\u5403\u6811\u679C" },
+    unburden: { name: "\u8F7B\u88C5", desc: "\u6D88\u8017\u9053\u5177\u540E\u901F\u5EA6\u63D0\u5347" },
+    // 变形类特性
+    libero: { name: "\u81EA\u7531\u8005", desc: "\u4F7F\u7528\u62DB\u5F0F\u540E\u53D8\u4E3A\u5BF9\u5E94\u5C5E\u6027" },
+    protean: { name: "\u53D8\u5E7B\u81EA\u5982", desc: "\u4F7F\u7528\u62DB\u5F0F\u540E\u53D8\u4E3A\u5BF9\u5E94\u5C5E\u6027" },
+    illusion: { name: "\u5E7B\u89C9", desc: "\u51FA\u573A\u65F6\u4F2A\u88C5\u6210\u961F\u53CB" },
+    imposter: { name: "\u5192\u5145\u8005", desc: "\u51FA\u573A\u65F6\u53D8\u8EAB\u6210\u5BF9\u624B" },
+    disguise: { name: "\u753B\u76AE", desc: "\u9996\u6B21\u653B\u51FB\u4E0D\u53D7\u4F24\u4F46\u753B\u76AE\u6D88\u5931" },
+    ice_face: { name: "\u51B0\u51BB\u9762\u5B54", desc: "\u9996\u6B21\u7269\u7406\u653B\u51FB\u4E0D\u53D7\u4F24\u4F46\u53D8\u5F62" },
+    battle_bond: { name: "\u6218\u6597\u7F81\u7ECA", desc: "\u51FB\u5012\u5BF9\u624B\u540E\u53D8\u4E3A\u5F3A\u5316\u5F62\u6001" },
+    power_construct: { name: "\u6C14\u573A", desc: "HP\u51CF\u5C11\u65F6\u53D8\u4E3A\u5B8C\u5168\u5F62\u6001" },
+    schooling: { name: "\u9C7C\u7FA4", desc: "\u7B49\u7EA7\u9AD8\u65F6\u53D8\u4E3A\u7FA4\u4F53\u5F62\u6001" },
+    shields_down: { name: "\u62A4\u76FE", desc: "HP\u51CF\u5C11\u65F6\u66B4\u9732\u6838\u5FC3" },
+    stance_change: { name: "\u6218\u6597\u5207\u6362", desc: "\u4F7F\u7528\u62DB\u5F0F\u540E\u5207\u6362\u5F62\u6001" },
+    // 其他特性
+    pressure: { name: "\u538B\u8FEB\u611F", desc: "\u5BF9\u624B\u4F7F\u7528\u62DB\u5F0F\u65F6\u6D88\u8017\u66F4\u591APP" },
+    multiscale: { name: "\u591A\u91CD\u9CDE\u7247", desc: "HP\u6EE1\u65F6\u53D7\u5230\u7684\u4F24\u5BB3\u51CF\u534A" },
+    shadow_tag: { name: "\u5F71\u8E0F", desc: "\u5BF9\u624B\u65E0\u6CD5\u9003\u8DD1" },
+    arena_trap: { name: "\u6C99\u7A74", desc: "\u5730\u9762\u5C5E\u6027\u5BF9\u624B\u65E0\u6CD5\u9003\u8DD1" },
+    magnet_pull: { name: "\u78C1\u529B", desc: "\u94A2\u5C5E\u6027\u5BF9\u624B\u65E0\u6CD5\u9003\u8DD1" },
+    mold_breaker: { name: "\u7834\u683C", desc: "\u65E0\u89C6\u5BF9\u624B\u7279\u6027" },
+    teravolt: { name: "\u6DA1\u8F6E\u706B\u7130", desc: "\u65E0\u89C6\u5BF9\u624B\u7279\u6027" },
+    turboblaze: { name: "\u6DA1\u8F6E\u706B\u7130", desc: "\u65E0\u89C6\u5BF9\u624B\u7279\u6027" },
+    infiltrator: { name: "\u7A7F\u900F", desc: "\u65E0\u89C6\u5BF9\u624B\u58C1\u969C\u548C\u66FF\u8EAB" },
+    prankster: { name: "\u6076\u4F5C\u5267\u4E4B\u5FC3", desc: "\u53D8\u5316\u62DB\u5F0F\u4F18\u5148\u5EA6\u63D0\u5347" },
+    gale_wings: { name: "\u75BE\u98CE\u4E4B\u7FFC", desc: "\u98DE\u884C\u62DB\u5F0F\u4F18\u5148\u5EA6\u63D0\u5347" },
+    triage: { name: "\u6CBB\u7597\u4E4B\u5FC3", desc: "\u56DE\u590D\u62DB\u5F0F\u4F18\u5148\u5EA6\u63D0\u5347" },
+    stall: { name: "\u6162\u542F\u52A8", desc: "\u884C\u52A8\u987A\u5E8F\u5FC5\u5B9A\u6700\u540E" },
+    slow_start: { name: "\u6162\u542F\u52A8", desc: "\u524D\u4E94\u56DE\u5408\u653B\u51FB\u548C\u901F\u5EA6\u51CF\u534A" },
+    defeatist: { name: "\u8D25\u5F31", desc: "HP\u51CF\u5C11\u65F6\u653B\u9632\u51CF\u534A" },
+    truant: { name: "\u61D2\u60F0", desc: "\u6BCF\u56DE\u5408\u4EA4\u66FF\u884C\u52A8" }
+  };
 
   // src/styles/index.js
   var styles = {
@@ -27298,14 +27441,14 @@ var App = (() => {
         alt: pokemon1.name,
         style: compareStyles.pokemonImage
       }
-    ), /* @__PURE__ */ import_react3.default.createElement("h3", { style: compareStyles.pokemonName }, "#", String(pokemon1.id).padStart(3, "0"), " ", pokemon1.name.toUpperCase()), /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.typeBadges }, types1.map((type, idx) => /* @__PURE__ */ import_react3.default.createElement("span", { key: idx, style: { ...compareStyles.typeBadge, backgroundColor: TYPE_COLORS[type] } }, TYPE_NAMES_ZH[type]))), /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.infoRow }, /* @__PURE__ */ import_react3.default.createElement("span", null, "\u8EAB\u9AD8: ", (pokemon1.height / 10).toFixed(1), "m"), /* @__PURE__ */ import_react3.default.createElement("span", null, "\u4F53\u91CD: ", (pokemon1.weight / 10).toFixed(1), "kg"))), /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.vsContainer }, /* @__PURE__ */ import_react3.default.createElement("span", { style: compareStyles.vsText }, "VS")), /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.pokemonSide }, /* @__PURE__ */ import_react3.default.createElement(
+    ), /* @__PURE__ */ import_react3.default.createElement("h3", { style: compareStyles.pokemonName }, "#", String(pokemon1.id).padStart(3, "0"), " ", pokemon1.name.charAt(0).toUpperCase() + pokemon1.name.slice(1)), POKEMON_NAMES_ZH[pokemon1.name] && /* @__PURE__ */ import_react3.default.createElement("p", { style: { fontSize: 14, color: "#666", marginTop: -8, marginBottom: 8 } }, POKEMON_NAMES_ZH[pokemon1.name]), /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.typeBadges }, types1.map((type, idx) => /* @__PURE__ */ import_react3.default.createElement("span", { key: idx, style: { ...compareStyles.typeBadge, backgroundColor: TYPE_COLORS[type] } }, TYPE_NAMES_ZH[type]))), /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.infoRow }, /* @__PURE__ */ import_react3.default.createElement("span", null, "\u8EAB\u9AD8: ", (pokemon1.height / 10).toFixed(1), "m"), /* @__PURE__ */ import_react3.default.createElement("span", null, "\u4F53\u91CD: ", (pokemon1.weight / 10).toFixed(1), "kg"))), /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.vsContainer }, /* @__PURE__ */ import_react3.default.createElement("span", { style: compareStyles.vsText }, "VS")), /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.pokemonSide }, /* @__PURE__ */ import_react3.default.createElement(
       "img",
       {
         src: pokemon2.sprites.other["official-artwork"].front_default,
         alt: pokemon2.name,
         style: compareStyles.pokemonImage
       }
-    ), /* @__PURE__ */ import_react3.default.createElement("h3", { style: compareStyles.pokemonName }, "#", String(pokemon2.id).padStart(3, "0"), " ", pokemon2.name.toUpperCase()), /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.typeBadges }, types2.map((type, idx) => /* @__PURE__ */ import_react3.default.createElement("span", { key: idx, style: { ...compareStyles.typeBadge, backgroundColor: TYPE_COLORS[type] } }, TYPE_NAMES_ZH[type]))), /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.infoRow }, /* @__PURE__ */ import_react3.default.createElement("span", null, "\u8EAB\u9AD8: ", (pokemon2.height / 10).toFixed(1), "m"), /* @__PURE__ */ import_react3.default.createElement("span", null, "\u4F53\u91CD: ", (pokemon2.weight / 10).toFixed(1), "kg")))), /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.statsSection }, /* @__PURE__ */ import_react3.default.createElement("h4", { style: compareStyles.statsTitle }, "\u79CD\u65CF\u503C\u5BF9\u6BD4"), STAT_ORDER.map((statName) => {
+    ), /* @__PURE__ */ import_react3.default.createElement("h3", { style: compareStyles.pokemonName }, "#", String(pokemon2.id).padStart(3, "0"), " ", pokemon2.name.charAt(0).toUpperCase() + pokemon2.name.slice(1)), POKEMON_NAMES_ZH[pokemon2.name] && /* @__PURE__ */ import_react3.default.createElement("p", { style: { fontSize: 14, color: "#666", marginTop: -8, marginBottom: 8 } }, POKEMON_NAMES_ZH[pokemon2.name]), /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.typeBadges }, types2.map((type, idx) => /* @__PURE__ */ import_react3.default.createElement("span", { key: idx, style: { ...compareStyles.typeBadge, backgroundColor: TYPE_COLORS[type] } }, TYPE_NAMES_ZH[type]))), /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.infoRow }, /* @__PURE__ */ import_react3.default.createElement("span", null, "\u8EAB\u9AD8: ", (pokemon2.height / 10).toFixed(1), "m"), /* @__PURE__ */ import_react3.default.createElement("span", null, "\u4F53\u91CD: ", (pokemon2.weight / 10).toFixed(1), "kg")))), /* @__PURE__ */ import_react3.default.createElement("div", { style: compareStyles.statsSection }, /* @__PURE__ */ import_react3.default.createElement("h4", { style: compareStyles.statsTitle }, "\u79CD\u65CF\u503C\u5BF9\u6BD4"), STAT_ORDER.map((statName) => {
       const value1 = statMap1[statName] || 0;
       const value2 = statMap2[statName] || 0;
       const maxStat = 200;
@@ -27420,7 +27563,7 @@ var App = (() => {
         style: styles.viewCompareButton
       },
       "\u2696\uFE0F \u67E5\u770B\u5BF9\u6BD4"
-    )), /* @__PURE__ */ import_react4.default.createElement("h1", { style: styles.title }, "#", String(pokemon.id).padStart(3, "0"), " ", pokemon.name.toUpperCase())), /* @__PURE__ */ import_react4.default.createElement("div", { style: styles.detailContent }, /* @__PURE__ */ import_react4.default.createElement(
+    )), /* @__PURE__ */ import_react4.default.createElement("h1", { style: styles.title }, "#", String(pokemon.id).padStart(3, "0"), " ", pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1), POKEMON_NAMES_ZH[pokemon.name] && /* @__PURE__ */ import_react4.default.createElement("span", { style: { fontSize: "0.6em", display: "block", marginTop: 4, color: "#666" } }, POKEMON_NAMES_ZH[pokemon.name]))), /* @__PURE__ */ import_react4.default.createElement("div", { style: styles.detailContent }, /* @__PURE__ */ import_react4.default.createElement(
       "img",
       {
         src: pokemon.sprites.other["official-artwork"].front_default,
@@ -27428,20 +27571,22 @@ var App = (() => {
         style: styles.detailImage
       }
     ), /* @__PURE__ */ import_react4.default.createElement("div", { style: styles.detailInfo }, /* @__PURE__ */ import_react4.default.createElement("div", { style: styles.typeBadges }, types.map((type, idx) => /* @__PURE__ */ import_react4.default.createElement("span", { key: idx, style: { ...styles.typeBadge, backgroundColor: TYPE_COLORS[type] } }, TYPE_NAMES_ZH[type]))), /* @__PURE__ */ import_react4.default.createElement("div", { style: styles.infoRow }, /* @__PURE__ */ import_react4.default.createElement("span", null, "\u8EAB\u9AD8: ", (pokemon.height / 10).toFixed(1), "m"), /* @__PURE__ */ import_react4.default.createElement("span", null, "\u4F53\u91CD: ", (pokemon.weight / 10).toFixed(1), "kg")), /* @__PURE__ */ import_react4.default.createElement("div", { style: styles.abilitiesSection }, /* @__PURE__ */ import_react4.default.createElement("h4", { style: styles.abilitiesTitle }, "\u7279\u6027\uFF1A"), /* @__PURE__ */ import_react4.default.createElement("div", { style: styles.abilitiesList }, pokemon.abilities?.map((abilityInfo, idx) => {
-      const abilityName = abilityInfo.ability.name.charAt(0).toUpperCase() + abilityInfo.ability.name.slice(1);
+      const abilityKey = abilityInfo.ability.name;
+      const abilityData = ABILITIES_ZH[abilityKey];
       const isHidden = abilityInfo.is_hidden;
-      return /* @__PURE__ */ import_react4.default.createElement(
+      const displayName = abilityData?.name || abilityKey.charAt(0).toUpperCase() + abilityKey.slice(1);
+      const description = abilityData?.desc;
+      return /* @__PURE__ */ import_react4.default.createElement("div", { key: idx, style: { marginBottom: 8 } }, /* @__PURE__ */ import_react4.default.createElement(
         "span",
         {
-          key: idx,
           style: {
             ...styles.abilityBadge,
-            backgroundColor: isHidden ? "#9ca3af" : "#6366f1"
+            backgroundColor: isHidden ? "#f59e0b" : "#6366f1"
           }
         },
-        abilityName,
+        displayName,
         isHidden && /* @__PURE__ */ import_react4.default.createElement("span", { style: styles.hiddenTag }, " (\u9690\u85CF)")
-      );
+      ), description && /* @__PURE__ */ import_react4.default.createElement("span", { style: { fontSize: 12, color: "#666", marginLeft: 8 } }, description));
     }))), /* @__PURE__ */ import_react4.default.createElement("div", { style: styles.statsSection }, /* @__PURE__ */ import_react4.default.createElement("h4", { style: styles.statsTitle }, "\u79CD\u65CF\u503C\uFF1A"), /* @__PURE__ */ import_react4.default.createElement("div", { style: styles.radarChartContainer }, /* @__PURE__ */ import_react4.default.createElement(StatsRadarChart_default, { stats: pokemon.stats, color: TYPE_COLORS[mainType] })), /* @__PURE__ */ import_react4.default.createElement("div", { style: styles.statsList }, pokemon.stats?.map((statInfo, idx) => {
       const statName = STAT_NAMES_ZH[statInfo.stat.name] || statInfo.stat.name;
       const percentage = Math.min(statInfo.base_stat / 200 * 100, 100);
@@ -27475,6 +27620,7 @@ var App = (() => {
         }
       ),
       /* @__PURE__ */ import_react4.default.createElement("p", { style: styles.evolutionName }, evo.name.charAt(0).toUpperCase() + evo.name.slice(1)),
+      POKEMON_NAMES_ZH[evo.name] && /* @__PURE__ */ import_react4.default.createElement("p", { style: { ...styles.evolutionName, fontSize: 12, color: "#666", marginTop: 2 } }, POKEMON_NAMES_ZH[evo.name]),
       /* @__PURE__ */ import_react4.default.createElement("p", { style: styles.evolutionId }, "#", String(evo.id).padStart(3, "0"))
     ), idx < evolutionChain.chain.length - 1 && /* @__PURE__ */ import_react4.default.createElement("span", { style: styles.evolutionArrow }, "\u2192"))))), showCompare && compareList && compareList.length === 2 && /* @__PURE__ */ import_react4.default.createElement(
       CompareView_default,

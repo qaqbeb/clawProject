@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { BASE_URL, TYPE_COLORS, TYPE_NAMES_ZH, POKEMON_NAMES_ZH, STAT_NAMES_ZH, STAT_ORDER } from '../data/constants';
+import { BASE_URL, TYPE_COLORS, TYPE_NAMES_ZH, POKEMON_NAMES_ZH, STAT_NAMES_ZH, STAT_ORDER, ABILITIES_ZH } from '../data/constants';
 import { styles } from '../styles/index';
 import StatsRadarChart from './StatsRadarChart';
 import CompareView from './CompareView';
@@ -131,7 +131,14 @@ function DetailView({ pokemon, onBack, loading, onSelect, compareList = [], onAd
             </button>
           )}
         </div>
-        <h1 style={styles.title}>#{String(pokemon.id).padStart(3, '0')} {pokemon.name.toUpperCase()}</h1>
+        <h1 style={styles.title}>
+          #{String(pokemon.id).padStart(3, '0')} {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
+          {POKEMON_NAMES_ZH[pokemon.name] && (
+            <span style={{ fontSize: '0.6em', display: 'block', marginTop: 4, color: '#666' }}>
+              {POKEMON_NAMES_ZH[pokemon.name]}
+            </span>
+          )}
+        </h1>
       </header>
 
       <div style={styles.detailContent}>
@@ -157,19 +164,29 @@ function DetailView({ pokemon, onBack, loading, onSelect, compareList = [], onAd
             <h4 style={styles.abilitiesTitle}>特性：</h4>
             <div style={styles.abilitiesList}>
               {pokemon.abilities?.map((abilityInfo, idx) => {
-                const abilityName = abilityInfo.ability.name.charAt(0).toUpperCase() + abilityInfo.ability.name.slice(1);
+                const abilityKey = abilityInfo.ability.name;
+                const abilityData = ABILITIES_ZH[abilityKey];
                 const isHidden = abilityInfo.is_hidden;
+                const displayName = abilityData?.name || (abilityKey.charAt(0).toUpperCase() + abilityKey.slice(1));
+                const description = abilityData?.desc;
+
                 return (
-                  <span
-                    key={idx}
-                    style={{
-                      ...styles.abilityBadge,
-                      backgroundColor: isHidden ? '#9ca3af' : '#6366f1',
-                    }}
-                  >
-                    {abilityName}
-                    {isHidden && <span style={styles.hiddenTag}> (隐藏)</span>}
-                  </span>
+                  <div key={idx} style={{ marginBottom: 8 }}>
+                    <span
+                      style={{
+                        ...styles.abilityBadge,
+                        backgroundColor: isHidden ? '#f59e0b' : '#6366f1',
+                      }}
+                    >
+                      {displayName}
+                      {isHidden && <span style={styles.hiddenTag}> (隐藏)</span>}
+                    </span>
+                    {description && (
+                      <span style={{ fontSize: 12, color: '#666', marginLeft: 8 }}>
+                        {description}
+                      </span>
+                    )}
+                  </div>
                 );
               })}
             </div>
@@ -237,6 +254,11 @@ function DetailView({ pokemon, onBack, loading, onSelect, compareList = [], onAd
                   <p style={styles.evolutionName}>
                     {evo.name.charAt(0).toUpperCase() + evo.name.slice(1)}
                   </p>
+                  {POKEMON_NAMES_ZH[evo.name] && (
+                    <p style={{ ...styles.evolutionName, fontSize: 12, color: '#666', marginTop: 2 }}>
+                      {POKEMON_NAMES_ZH[evo.name]}
+                    </p>
+                  )}
                   <p style={styles.evolutionId}>#{String(evo.id).padStart(3, '0')}</p>
                 </div>
                 {idx < evolutionChain.chain.length - 1 && (
