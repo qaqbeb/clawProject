@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { BASE_URL, TYPE_COLORS, TYPE_NAMES_ZH, STAT_NAMES_ZH, STAT_ORDER, POKEMON_NAMES_ZH } from '../data/constants';
+import { BASE_URL, TYPE_COLORS, TYPE_NAMES_ZH, STAT_NAMES_ZH, STAT_ORDER } from '../data/constants';
+import { POKEMON_NAMES_ZH } from '../data/pokemon-names-zh.js';
 import { styles, compareStyles } from '../styles/index';
 
 // 对比视图组件
@@ -69,9 +70,9 @@ function CompareView({ compareList, onClose }) {
             <h3 style={compareStyles.pokemonName}>
               #{String(pokemon1.id).padStart(3, '0')} {pokemon1.name.charAt(0).toUpperCase() + pokemon1.name.slice(1)}
             </h3>
-            {POKEMON_NAMES_ZH[pokemon1.name] && (
+            {POKEMON_NAMES_ZH[pokemon1.id] && (
               <p style={{ fontSize: 14, color: '#666', marginTop: -8, marginBottom: 8 }}>
-                {POKEMON_NAMES_ZH[pokemon1.name]}
+                {POKEMON_NAMES_ZH[pokemon1.id]}
               </p>
             )}
             <div style={compareStyles.typeBadges}>
@@ -102,9 +103,9 @@ function CompareView({ compareList, onClose }) {
             <h3 style={compareStyles.pokemonName}>
               #{String(pokemon2.id).padStart(3, '0')} {pokemon2.name.charAt(0).toUpperCase() + pokemon2.name.slice(1)}
             </h3>
-            {POKEMON_NAMES_ZH[pokemon2.name] && (
+            {POKEMON_NAMES_ZH[pokemon2.id] && (
               <p style={{ fontSize: 14, color: '#666', marginTop: -8, marginBottom: 8 }}>
-                {POKEMON_NAMES_ZH[pokemon2.name]}
+                {POKEMON_NAMES_ZH[pokemon2.id]}
               </p>
             )}
             <div style={compareStyles.typeBadges}>

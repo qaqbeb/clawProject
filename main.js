@@ -18,50 +18,33 @@ function createWindow() {
   // 开发时打开开发者工具
   // win.webContents.openDevTools();
   
-  // 渲染完成后获取 DOM 快照
+  // 渲染完成后自动点击进入详情页
   win.webContents.on('did-finish-load', () => {
-    const checkInterval = setInterval(() => {
+    setTimeout(() => {
+      // 等待页面完全加载后点击第一只宝可梦
       win.webContents.executeJavaScript(`
         (function() {
-          const cards = document.querySelectorAll('[style*="card"]');
-          const searchInput = document.querySelector('input[type="text"]');
-          if (cards.length > 0 || searchInput) {
-            return true;
+          // 查找所有卡片
+          const gridItems = document.querySelectorAll('[style*="grid"] > div');
+          console.log('Found cards:', gridItems.length);
+          
+          if (gridItems.length > 0) {
+            // 模拟点击事件
+            const firstCard = gridItems[0];
+            const clickEvent = new MouseEvent('click', {
+              bubbles: true,
+              cancelable: true,
+              view: window
+            });
+            firstCard.dispatchEvent(clickEvent);
+            return 'Clicked first card';
           }
-          return false;
+          return 'No cards found';
         })()
-      `).then(ready => {
-        if (ready) {
-          clearInterval(checkInterval);
-          return win.webContents.executeJavaScript('document.documentElement.outerHTML');
-        }
-      }).then(html => {
-        if (!html) return;
-        fs.writeFileSync('/tmp/pokemon-dom.html', html);
-        
-        return win.webContents.executeJavaScript(`
-          JSON.stringify({
-            title: document.title,
-            pokemonCount: document.querySelectorAll('[style*="grid"] > div').length,
-            searchInput: document.querySelector('input[type="text"]') ? 'exists' : 'missing',
-            filterSelects: document.querySelectorAll('select').length,
-            typeChartButton: document.body.innerText.includes('属性相克表'),
-            favoritesText: document.body.innerText.includes('收藏'),
-            evolutionChain: document.body.innerText.includes('进化链'),
-            compareButton: document.body.innerText.includes('对比'),
-            statsSection: document.body.innerText.includes('种族值'),
-          })
-        `);
-      }).then(result => {
-        if (result) {
-          fs.writeFileSync('/tmp/pokemon-state.json', result);
-          console.log('DOM captured successfully');
-        }
-      }).catch(err => console.error('Error:', err));
-    }, 1000); // 每秒检查一次
-    
-    // 超时保护
-    setTimeout(() => clearInterval(checkInterval), 30000);
+      `).then(result => {
+        console.log('Click result:', result);
+      }).catch(err => console.error('Click error:', err));
+    }, 5000); // 等待5秒确保页面加载完成
   });
 }
 

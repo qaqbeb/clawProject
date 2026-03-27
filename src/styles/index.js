@@ -48,7 +48,7 @@ export const styles = {
   infoRow: { display: 'flex', gap: 30, fontSize: 14, color: '#666' },
   abilitiesSection: { marginTop: 20 },
   abilitiesTitle: { fontSize: 14, fontWeight: 'bold', color: '#333', marginBottom: 10 },
-  abilitiesList: { display: 'flex', gap: 10, flexWrap: 'wrap' },
+  abilitiesList: { display: 'flex', flexDirection: 'column', gap: 8 },
   abilityBadge: {
     padding: '6px 14px',
     borderRadius: 20,

@@ -1,5 +1,6 @@
 import React from 'react';
-import { TYPE_COLORS, TYPE_NAMES_ZH, POKEMON_NAMES_ZH, TYPES, GENERATIONS } from '../data/constants';
+import { TYPE_COLORS, TYPE_NAMES_ZH, TYPES, GENERATIONS } from '../data/constants';
+import { POKEMON_NAMES_ZH } from '../data/pokemon-names-zh.js';
 import { styles } from '../styles/index';
 
 // 心形图标组件
@@ -120,7 +121,7 @@ function ListView({ pokemonList, searchQuery, selectedType, selectedGen, onSearc
               style={styles.cardImage}
             />
             <p style={styles.cardId}>#{String(p.id).padStart(3, '0')}</p>
-            {POKEMON_NAMES_ZH[p.name] && <p style={styles.cardNameZh}>{POKEMON_NAMES_ZH[p.name]}</p>}
+            {POKEMON_NAMES_ZH[p.id] && <p style={styles.cardNameZh}>{POKEMON_NAMES_ZH[p.id]}</p>}
             <p style={styles.cardNameEn}>{p.name.charAt(0).toUpperCase() + p.name.slice(1)}</p>
             <div style={styles.cardTypes}>
               {p.types.map((type, idx) => (

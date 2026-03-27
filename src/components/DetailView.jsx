@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { BASE_URL, TYPE_COLORS, TYPE_NAMES_ZH, POKEMON_NAMES_ZH, STAT_NAMES_ZH, STAT_ORDER, ABILITIES_ZH } from '../data/constants';
+import { BASE_URL, TYPE_COLORS, TYPE_NAMES_ZH, STAT_NAMES_ZH, STAT_ORDER, ABILITIES_ZH } from '../data/constants';
+import { POKEMON_NAMES_ZH } from '../data/pokemon-names-zh.js';
 import { styles } from '../styles/index';
 import StatsRadarChart from './StatsRadarChart';
 import CompareView from './CompareView';
@@ -133,9 +134,9 @@ function DetailView({ pokemon, onBack, loading, onSelect, compareList = [], onAd
         </div>
         <h1 style={styles.title}>
           #{String(pokemon.id).padStart(3, '0')} {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
-          {POKEMON_NAMES_ZH[pokemon.name] && (
+          {POKEMON_NAMES_ZH[pokemon.id] && (
             <span style={{ fontSize: '0.6em', display: 'block', marginTop: 4, color: '#666' }}>
-              {POKEMON_NAMES_ZH[pokemon.name]}
+              {POKEMON_NAMES_ZH[pokemon.id]}
             </span>
           )}
         </h1>
@@ -171,18 +172,19 @@ function DetailView({ pokemon, onBack, loading, onSelect, compareList = [], onAd
                 const description = abilityData?.desc;
 
                 return (
-                  <div key={idx} style={{ marginBottom: 8 }}>
+                  <div key={idx} style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
                     <span
                       style={{
                         ...styles.abilityBadge,
                         backgroundColor: isHidden ? '#f59e0b' : '#6366f1',
+                        alignSelf: 'flex-start',
                       }}
                     >
                       {displayName}
                       {isHidden && <span style={styles.hiddenTag}> (隐藏)</span>}
                     </span>
                     {description && (
-                      <span style={{ fontSize: 12, color: '#666', marginLeft: 8 }}>
+                      <span style={{ fontSize: 12, color: '#666', paddingLeft: 4 }}>
                         {description}
                       </span>
                     )}
@@ -254,9 +256,9 @@ function DetailView({ pokemon, onBack, loading, onSelect, compareList = [], onAd
                   <p style={styles.evolutionName}>
                     {evo.name.charAt(0).toUpperCase() + evo.name.slice(1)}
                   </p>
-                  {POKEMON_NAMES_ZH[evo.name] && (
+                  {POKEMON_NAMES_ZH[evo.id] && (
                     <p style={{ ...styles.evolutionName, fontSize: 12, color: '#666', marginTop: 2 }}>
-                      {POKEMON_NAMES_ZH[evo.name]}
+                      {POKEMON_NAMES_ZH[evo.id]}
                     </p>
                   )}
                   <p style={styles.evolutionId}>#{String(evo.id).padStart(3, '0')}</p>
